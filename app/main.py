@@ -36,6 +36,10 @@ def search():
             output = 'Not found' + query
     return render_template('search.html', pages = output)
 
+@app.route('/viewsearch', methods = ['GET', 'POST'])
+def viewanswer():
+    
+
 
 @app.route("/")
 def get_index():
