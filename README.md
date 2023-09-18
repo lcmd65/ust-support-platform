@@ -1,5 +1,8 @@
 ## Documentation
-chat assistant web platform
+chat assistant web platform (flask)
 
 ### Requirement
         requirement.txt
+
+### URL link:
+        None
