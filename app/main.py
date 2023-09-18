@@ -41,9 +41,13 @@ def viewanswer():
     
 
 
-@app.route("/")
+@app.route("/home", methods = ['GETS', 'POST'] )
 def get_index():
-    return render_template('search.html')
+    try:
+        
+    except Exception as e:
+        print(e)
+    return render_template('home.html')
 
 
 if __name__ == "__main__":
