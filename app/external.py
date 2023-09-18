@@ -1,1 +1,2 @@
 app
+word2vec_model
