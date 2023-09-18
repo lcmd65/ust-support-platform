@@ -37,8 +37,7 @@ def search():
 
 @external.app.route('/viewsearch', methods = ['GET', 'POST'])
 def viewanswer():
-    
-
+    pass
 
 @external.app.route("/home", methods = ['GETS', 'POST'] )
 def get_index():
