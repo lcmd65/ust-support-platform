@@ -6,3 +6,6 @@ chat assistant web platform (flask)
 
 ### URL link:
         None
+
+### UI
+        None 
