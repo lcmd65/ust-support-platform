@@ -1,6 +1,6 @@
 from flask import Flask
 
-app = Flask(__name__)
+app = None
 client = None
 word2vec_model = None 
 

@@ -3,18 +3,24 @@ import templates
 #from flask import Flask, render_template, jsonify
 from flask import Flask, render_template, abort, request, jsonify
 from flask import request, redirect, url_for
+from main import app
 import external
 import controls.database
 
-@external.app.route("/home/",methods = ['GET', 'POST'])
-def homeView():
-    pass
+@app.route('/')
+def main_view():
+    return redirect('/login/')
 
-@external.app.route("/login/",  methods = ['GET', 'POST'])
+@app.route("/home/",methods = ['GET', 'POST'])
+def home():
+    return render_template("home.html")
+
+@app.route("/login/",  methods = ['GET', 'POST'])
 def login():
+    error = None
     if request.method == "POST":
-        username = request.values['username'] 
-        password = request.values['password']
+        username = request.values['user'] 
+        password = request.values['pass']
         bool = controls.database.userAuthentication(username, password)
         if bool == True:
             return render_template("home.html")
@@ -25,4 +31,5 @@ def login():
                     <p><text = "login false">
                 </form>
             '''
+    return render_template('login.html', error = error)
 

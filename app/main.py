@@ -6,17 +6,23 @@ import gensim
 import external
 from distutils.version import LooseVersion, StrictVersion
 from packaging import version
-from views.home import *
+from views.view import *
 import os
 import importlib
-import pymongo
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 
 # Import the Flask app from the external module
 external_app = importlib.import_module("external")
+app = Flask(__name__, template_folder="templates")
 
+uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
 
+@app.route('/')
+def main_view():
+    return redirect('/login/')
 
 if __name__ == "__main__":
     external.word2vec_model = 'data/vnex.model.bin'
-    external.client = pymongo.MongoClient('localhost', 27017, username='username', password='password')
-    external.app.run(port=8089)
+    external.client = MongoClient(uri, server_api=ServerApi('1'))
+    app.run(port=8089)
