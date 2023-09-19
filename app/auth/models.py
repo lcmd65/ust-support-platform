@@ -1,5 +1,3 @@
-
-
 class Request():
     def __init__(self):
         self.request = None
@@ -20,15 +18,15 @@ class User():
         self.parsingIDImage()
     
     def parsingIDRequest(self):
-        import controls.database
-        data = controls.database.connectUserRequest()
+        from app import db
+        data = db.connectUserRequest()
         for item in data:
             if item["id"] == str(self.id):
                 self.requests.append(item)
     
     def parsingIDImage(self):
-        import controls.database
-        self.image = controls.database.connectUserImage(self.id)
+        from app import db
+        self.image = db.connectUserImage(self.id)
     
     def updateRequest(self):
         self.requests.clear()

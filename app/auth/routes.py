@@ -1,29 +1,24 @@
-import requests
-import templates
-#from flask import Flask, render_template, jsonify
-from flask import Flask, render_template, abort, request, jsonify
-from flask import request, redirect, url_for
-from main import app
-import external
-import controls.database
+from flask import Blueprint
+from flask import request, render_template
 
-@app.route('/')
-def main_view():
-    return redirect('/login/')
+my_blueprint = Blueprint('my_blueprint', __name__)
+from app import db
 
-@app.route("/home/",methods = ['GET', 'POST'])
+
+
+@my_blueprint.route("/home",methods = ['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    return render_template("blog/home.html")
 
-@app.route("/login/",  methods = ['GET', 'POST'])
+@my_blueprint.route("/login",  methods = ['GET', 'POST'])
 def login():
     error = None
     if request.method == "POST":
         username = request.values['user'] 
         password = request.values['pass']
-        bool = controls.database.userAuthentication(username, password)
+        bool = db.userAuthentication(username, password)
         if bool == True:
-            return render_template("home.html")
+            return render_template("blog/home.html")
         else: 
             return \
             '''
@@ -31,16 +26,20 @@ def login():
                     <p><text = "login false">
                 </form>
             '''
-    return render_template('login.html', error = error)
+    return render_template('auth/login.html', error = error)
 
-@app.route("/register/", methods = ['GET', 'POST'])
+@my_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
-    error = None
-    if request.method == "POST":
-        username = request.values['user'] 
-        password = request.values['pass']
-        email = request.values['email'] 
-        id = request.values['id']
-        gender = request.values['gender']
+    try:
+        error = None
+        if request.method == "POST":
+            username = request.values['user'] 
+            password = request.values['pass']
+            email = request.values['email'] 
+            id = request.values['id']
+            gender = request.values['gender']
+    except:
+        pass
+    
 
 
