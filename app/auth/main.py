@@ -3,7 +3,6 @@ from flask import Flask, render_template, abort, request, jsonify
 from flask import request, redirect, url_for
 import codecs
 import gensim
-import external
 from distutils.version import LooseVersion, StrictVersion
 from packaging import version
 from views import *
@@ -20,5 +19,5 @@ uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?re
 
 if __name__ == "__main__":
     external.word2vec_model = 'data/vnex.model.bin'
-    external.client = MongoClient(uri, server_api=ServerApi('1'))
+    client = MongoClient(uri, server_api=ServerApi('1'))
     app.run(port=8089,debug=True)
