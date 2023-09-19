@@ -15,12 +15,8 @@ from pymongo.server_api import ServerApi
 # Import the Flask app from the external module
 external_app = importlib.import_module("external")
 app = Flask(__name__, template_folder="templates")
-
 uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
 
-@app.route('/')
-def main_view():
-    return redirect('/login/')
 
 if __name__ == "__main__":
     external.word2vec_model = 'data/vnex.model.bin'
