@@ -1,14 +1,16 @@
 import os
-from flask import Flask, redirect
+from flask import Flask, redirect, Blueprint
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 
 
 def create_app(test_config=None):
+    from .auth.routes import my_blueprint
     # create and configure the app
     uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
     client = MongoClient(uri, server_api=ServerApi('1'))
     app = Flask(__name__, instance_relative_config=True)
+    app.register_blueprint(my_blueprint)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
