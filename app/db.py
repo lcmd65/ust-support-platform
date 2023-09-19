@@ -6,22 +6,21 @@ from .auth.models import User
 from bson import ObjectId
 import os
 import base64
-import io
 import requests
-import mysql.connector
-import time
 import bson
 from bson.binary import Binary
-
 
 ###### Mongo ####################################################################################################################################
 
 uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
+client = client = MongoClient(uri, server_api=ServerApi('1'))
+
 def getIPAddress():
     return requests.get("https://api.ipify.org").text
 
 def addIPtoMongodbAtlas(ip_address):
     try:
+        from app import client
         url = "https://cloud.mongodb.com/api/v1/admin/clusters/<CLUSTER_ID>/security/ipWhitelist/add"
         headers = {"Authorization": "Bearer <API_KEY>"}
         data = {"ipAddress": ip_address}
@@ -104,6 +103,7 @@ def connectUserRequest():
         
 def userParsing(account,password):
     getClient()
+    from app import client
     db = client["User"]
     collection = db["User_info"]
     documents = collection.find()
@@ -111,7 +111,7 @@ def userParsing(account,password):
         if item["username"] == account and item["password"] == password:
             User_info = User(item["username"], item["password"], item["email"], item["id"], item["gender"])
         
-def userAuthentication2(account, password):
+def userAuthentication(account, password):
     client = MongoClient(uri, server_api=ServerApi('1'))
     addIPtoMongodbAtlas(getIPAddress())
     # Send a ping to confirm a successful connection

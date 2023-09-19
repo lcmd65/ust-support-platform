@@ -12,6 +12,7 @@ class User():
         self.id = ID
         self.gender = gender
         self.image = None
+        self.role = None
         self.requests = []
         
         self.parsingIDRequest()
@@ -31,6 +32,8 @@ class User():
     def updateRequest(self):
         self.requests.clear()
         self.parsingIDRequest()
+        
+
     
         
 

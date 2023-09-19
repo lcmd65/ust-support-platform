@@ -32,6 +32,6 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def main():
-        return redirect('/login')
+        return redirect('/login/')
 
     return app
