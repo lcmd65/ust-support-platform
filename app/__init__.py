@@ -1,10 +1,3 @@
-"""
-App init module
-
-
-@author: {{ cookiecutter.author }}
-"""
-
 
 from flask import Flask, redirect, render_template, jsonify
 import logging
