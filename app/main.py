@@ -6,7 +6,7 @@ import gensim
 import external
 from distutils.version import LooseVersion, StrictVersion
 from packaging import version
-from views.view import *
+from views import *
 import os
 import importlib
 from pymongo.mongo_client import MongoClient
@@ -21,4 +21,4 @@ uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?re
 if __name__ == "__main__":
     external.word2vec_model = 'data/vnex.model.bin'
     external.client = MongoClient(uri, server_api=ServerApi('1'))
-    app.run(port=8089)
+    app.run(port=8089,debug=True)
