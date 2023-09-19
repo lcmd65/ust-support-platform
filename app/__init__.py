@@ -7,7 +7,7 @@ from .extensions import *
 
 def create_app():
     """Initiate flask app"""
-    app = Flask(__name__, instance_relative_config=True, static_folder="ui/static", template_folder="ui/templates")
+    app = Flask(__name__, instance_relative_config=True, static_folder="static", template_folder="templates")
     app.config.from_pyfile('config.py')
 
     # login
@@ -39,7 +39,7 @@ def create_app():
         @app.route("/")
         def home():
             """Handle root resource request"""
-            return redirect("/admin/login")
+            return redirect("/login/")
 
         @app.errorhandler(404)
         def page_not_found(e):

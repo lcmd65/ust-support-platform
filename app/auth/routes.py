@@ -33,3 +33,14 @@ def login():
             '''
     return render_template('login.html', error = error)
 
+@app.route("/register/", methods = ['GET', 'POST'])
+def register():
+    error = None
+    if request.method == "POST":
+        username = request.values['user'] 
+        password = request.values['pass']
+        email = request.values['email'] 
+        id = request.values['id']
+        gender = request.values['gender']
+
+
