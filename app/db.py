@@ -2,7 +2,6 @@
 import pandas as pd
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from .auth.models import User
 from bson import ObjectId
 import os
 import base64
@@ -106,7 +105,8 @@ def userParsing(account,password):
     documents = collection.find()
     for item in documents:
         if item["username"] == account and item["password"] == password:
-            User_info = User(item["username"], item["password"], item["email"], item["id"], item["gender"])
+            # User_info = User(item["username"], item["password"], item["email"], item["id"], item["gender"])
+            return item
         
 def userAuthentication(account, password):
     addIPtoMongodbAtlas(getIPAddress())
@@ -120,4 +120,12 @@ def userAuthentication(account, password):
             return True
     return False
 
+def connectUserImage(id):
+    db = app.application._client["User"]
+    collection = db["Image"]
+    documents = collection.find()
+    for item in documents:
+        if str(item["id"]) == str(id):
+            return item["image"]
+            
 ##### combine MySQL and MongoDB in Program Processing#########################################################################################

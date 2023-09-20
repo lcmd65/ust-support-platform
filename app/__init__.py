@@ -9,13 +9,16 @@ class AppVariable():
         self._app = Flask(__name__, instance_relative_config=True)
         self._uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
         self._client = MongoClient(self._uri, server_api=ServerApi('1'))
+        self._user = None
     
 application = AppVariable()
 
 def create_app(test_config=None):
     from .auth.routes import my_blueprint
+    from .blog.routes import home_blueprint
     # create and configure the app
     application._app.register_blueprint(my_blueprint)
+    application._app.register_blueprint(home_blueprint)
     application._app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(application._app.instance_path, 'flaskr.sqlite'),

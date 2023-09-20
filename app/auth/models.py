@@ -1,3 +1,5 @@
+from app import db
+
 class Request():
     def __init__(self):
         self.request = None
