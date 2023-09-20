@@ -17,22 +17,35 @@
             <div class ="container-user">
                 <div class ="container-user-image">
                     {% if user_image %}
-                    <img src= {{user_image}} >
+                    <img src= {{app.application._user.image}} >
                     {% endif%}
                 </div>
                 <div class ="container-username">
-                    <p class "container-username-text" type ="text" value ="{{username}}">
+                    <p class "container-username-text" type ="text" value ="{{app.application._user.username}}">
                     </p>
                 </div>
-                <div class="container-list-user-function">
-                    <ul>
-                        <li><button name="add">Add</button></li>
-                        <li><button name="remove">Remove</button></li>
-                        <li><button name="clear">Clear</button></li>
-                    </ul>
+
+                    <div class="container-list-user-function">
+                        <ul>
+                            <li><button name="add">Your Infomation</button></li>
+                            <li><button name="remove">Settings</button></li>
+                            <li><button name="clear">Exit</button></li>
+                        </ul>
+                    </div>
+            </div>
+
+            <div class ="container-nohcel-chatbox-workspace" method = get>
+                <div class = "container-nohcel-chatbox-tree">
+                    <div class = "container-nohcel-chatbox-tree-name">
+                        <p class ="treename" type = "text" value ={{chatbox.tree.name}}>
+                        </p> 
+                    </div>
+                    <div class ="container-nohcel-chatbox-tree-item">
+                        {% for item in {{chatbox.tree.item}} %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
                 </div>
             </div>
-            <div class ="container-nohcel"
         </div>
         <script src="" async defer></script>
     </body>
