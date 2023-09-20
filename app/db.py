@@ -9,18 +9,16 @@ import base64
 import requests
 import bson
 from bson.binary import Binary
+import app
 
 ###### Mongo ####################################################################################################################################
 
-uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
-client = client = MongoClient(uri, server_api=ServerApi('1'))
 
 def getIPAddress():
     return requests.get("https://api.ipify.org").text
 
 def addIPtoMongodbAtlas(ip_address):
     try:
-        from app import client
         url = "https://cloud.mongodb.com/api/v1/admin/clusters/<CLUSTER_ID>/security/ipWhitelist/add"
         headers = {"Authorization": "Bearer <API_KEY>"}
         data = {"ipAddress": ip_address}
@@ -29,14 +27,14 @@ def addIPtoMongodbAtlas(ip_address):
         print(e)
         
 def getClient():
-    client = MongoClient(uri, server_api=ServerApi('1'))
+    app.application._client = MongoClient(app.application._uri, server_api=ServerApi('1'))
 
 def connectMongoEmbedded():
     addIPtoMongodbAtlas(getIPAddress())
     # Send a ping to confirm a successful connection
     try:
-        client.admin.command('ping')
-        db = client["Nohcel_Dataset"]
+        app.application._client.admin.command('ping')
+        db = app.application._client["Nohcel_Dataset"]
         collection = db["embedded_dataset"]
         documents = collection.find()
         return documents
@@ -46,8 +44,8 @@ def connectMongoEmbedded():
 ## register user    
 def addUserMongoDB(username, email, password, id , gender):
     getClient()
-    client.admin.command('ping')
-    db = client["User"]
+    app.application._client.admin.command('ping')
+    db = app.application._client["User"]
     ## processing User basic infomation
     collection = db["User_info"]
     user = collection.find()
@@ -84,7 +82,7 @@ def pushRequestToMongo(id, subject_text, request_text):
             "request": str(request_text),
             "respone": "",
         }
-    db = client["User"]
+    db = app.application._client["User"]
     collection = db["Request"]
     collection.insert_one(document)
     return document
@@ -93,8 +91,8 @@ def pushRequestToMongo(id, subject_text, request_text):
 def connectUserRequest():
     getClient()
     try:
-        client.admin.command('ping')
-        section_database = client["User"]
+        app.application._client.admin.command('ping')
+        section_database = app.application._client["User"]
         collection_section = section_database["Request"]
         requests = collection_section.find()
         return requests
@@ -103,8 +101,7 @@ def connectUserRequest():
         
 def userParsing(account,password):
     getClient()
-    from app import client
-    db = client["User"]
+    db = app.application._client["User"]
     collection = db["User_info"]
     documents = collection.find()
     for item in documents:
@@ -112,11 +109,10 @@ def userParsing(account,password):
             User_info = User(item["username"], item["password"], item["email"], item["id"], item["gender"])
         
 def userAuthentication(account, password):
-    client = MongoClient(uri, server_api=ServerApi('1'))
     addIPtoMongodbAtlas(getIPAddress())
     # Send a ping to confirm a successful connection
-    client.admin.command('ping')
-    db = client["User"]
+    app.application._client.admin.command('ping')
+    db = app.application._client["User"]
     collection = db["User_info"]
     documents = collection.find()
     for item in documents:
