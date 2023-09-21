@@ -5,4 +5,6 @@ home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route("/home/",methods = ['GET', 'POST'])
 def home():
-    return render_template("blog/home.html")
+    import app
+    return render_template("blog/home.html", app_username = app.application._user.username, app_image =app.application._user.image)
+    

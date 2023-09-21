@@ -15,7 +15,7 @@ def login():
         password = request.values['pass']
         bool = db.userAuthentication(username, password)
         if bool == True:
-            controlAuth(username, password)
+            app.application_user = controlAuth(username, password)
             return redirect("/home")
         else: 
             return render_template("auth/login.html", error="Invalid username or password.")
