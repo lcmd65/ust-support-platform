@@ -6,19 +6,44 @@ body {
     line-height: 1.6;
     color: #054784;
     text-align: center;
-    background-color: #f5f8fa;
+    background-color: #ececec;
+}
+
+.card-body {
+    margin-top: 100px;
 }
 
 .login-form {
-    font-family: Raleway, sans-serif;
-    position: fixed;
-    height: 50%;
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 25%;
+    padding: 100px;
+    text-align: left;
+    min-width: 800px;
+    min-height: 1000px;
+    margin: auto;
+    display: table;
 }
 
 .login-form .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.wrap-label {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    align-self: center;
+    text-align: center;
+}
+
+.wrap-input-entry {
+    align-self: center;
+    text-align: center;
+}
+
+.input100 {
+    width: 100%;
+    justify-self: auto;
+    border-width: 100%;
+    text-align: left;
+    height: 25px;
+    font-size: smaller;
 }

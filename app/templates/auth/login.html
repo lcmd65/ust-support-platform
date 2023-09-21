@@ -18,13 +18,18 @@
                     <div class="card-body">
 						<form action="/login/" method = post>
 							<div class="wrap-login">
-								<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+								<div class = "wrap-label">
+									<p> Username</p>
+								</div>
+								<div class="wrap-input-entry" data-validate = "Username">
 									<input class="input100" type="userame" name="user" value="{{
 										request.form.username}}">
 									<span class="focus-input100" data-placeholder="Username"></span>
 								</div>
-
-								<div class="wrap-input100 validate-input" data-validate="Enter password">
+								<div class = "wrap-label">
+									<p> Password</p>
+								</div>
+								<div class="wrap-input-entry" data-validate="Enter password">
 									<span class="btn-show-pass">
 										<i class="zmdi zmdi-eye"></i>
 									</span>
