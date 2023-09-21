@@ -19,13 +19,47 @@
 
 .card-body {
     align-items: center;
-    text-align: center;
+}
+
+.wrap-input-entry {
+    text-align: left;
+    align-content: right;
 }
 
 .input100 {
     height: 25px;
+    margin-right: 0px;
+}
+
+.wrap-label-content {
+    vertical-align: left;
 }
 
 .label-content {
     font-size: small;
+    text-align: left;
+}
+
+.wrap-input-content {
+    vertical-align: right;
+}
+
+.wrap-forgot-btn {
+    text-align: right;
+    vertical-align: right;
+}
+
+.forgot-btn {
+    margin-top: 100px;
+    width: 200px;
+    border: 0px;
+    border-radius: 8px;
+    height: 20px;
+    background-color: rgb(46, 77, 179);
+    color: white;
+    font-size: small;
+}
+
+.forgot-btn:hover {
+    background-color: #15256e;
 }

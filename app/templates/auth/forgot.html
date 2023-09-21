@@ -24,29 +24,47 @@
                                     <form class = "form-forgot-entry" action ="\" method = post>
                                         <div class ="wrap-forgot-entry">
                                             <div class="wrap-input-entry" data-validate = "Username">
-                                                <span class= "label-content">Username</span>
-                                                <input class="input100" type="username" name="user" value="{{request.form.username}}">
-                                                <span class="focus-input100" data-placeholder="Your Username"></span>
+                                                <div class = "wrap-label-content">
+                                                    <span class= "label-content">Username</span>
+                                                </div>
+                                                <div class = "wrap-input-content">
+                                                    <input class="input100" type="username" name="user" value="{{request.form.username}}">
+                                                    <span class="focus-input100" data-placeholder="Your Username"></span>
+                                                </div>
                                             </div>
                                             <div class="wrap-input-entry" data-validate = "Email">
-                                                <span class= "label-content">Email</span>
-                                                <input class="input100" type="email" name="email" value="{{request.form.email}}">
-                                                <span class="focus-input100" data-placeholder="Your Email"></span>
+                                                <div class = "wrap-label-content">
+                                                    <span class= "label-content">Email</span>
+                                                </div>
+                                                <div class = "wrap-input-content">
+                                                    <input class="input100" type="email" name="email" value="{{request.form.email}}">
+                                                    <span class="focus-input100" data-placeholder="Your Email"></span>
+                                                </div>
                                             </div>
                                             <div class="wrap-input-entry" data-validate = "NewPass">
-                                                <span class= "label-content">New password<span>
-                                                <input class="input100" type="password" name="password" value="{{request.form.new_password}}">
-                                                <span class="focus-input100" data-placeholder="">
+                                                <div class = "wrap-label-content">
+                                                    <span class= "label-content">New password<span>
+                                                </div>
+                                                <div class = "wrap-input-content">
+                                                    <input class="input100" type="password" name="password" value="{{request.form.new_password}}">
+                                                    <span class="focus-input100" data-placeholder="">
+                                                </div>
                                             </div>
                                             <div class="wrap-input-entry" data-validate = "NewPass">
-                                                <span class= "label-content">Confirm new password</span>
-                                                <input class="input100" type="password" name="confirm_password" value="{{request.form.confirm_new_password}}">
-                                                <span class="focus-input100" data-placeholder="">
+                                                <div class = "wrap-label-content">
+                                                    <span class= "label-content">Confirm new password</span>
+                                                </div>
+                                                <div class = "wrap-input-content">
+                                                    <input class="input100" type="password" name="confirm_password" value="{{request.form.confirm_new_password}}">
+                                                    <span class="focus-input100" data-placeholder="">
+                                                </div>
                                             </div>
                                         </div>
-                                        <button class = "forgot-btn" type ="submit" value ="Ok">
-                                            Ok
-                                        </button>
+                                        <div class = "wrap-forgot-btn">
+                                            <button class = "forgot-btn" type ="submit" value ="Ok">
+                                                Ok
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
