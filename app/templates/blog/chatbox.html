@@ -34,13 +34,13 @@
                     </div>
             </div>
 
-            <div class ="container-nohcel-chatbox-workspace" method = get>
+            <div class ="container-nohcel-chatbox-workspace" method = "get">
                 <div class = "container-nohcel-chatbox-tree">
                     <div class = "container-nohcel-chatbox-tree-name">
                         <p class ="treename" type = "text" value ={{chatbox.tree.name}}>
                         </p> 
                     </div>
-                    <div class ="container-nohcel-chatbox-tree-item">
+                    <div class ="container-nohcel-chatbox-tree-item" method = "get" action ="/">
                         {% for item in {{chatbox.tree.item}} %}
                             <li>{{ item }}</li>
                         {% endfor %}
