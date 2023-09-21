@@ -12,3 +12,8 @@
     display: table;
     background-color: #ececec;
 }
+
+.card-body {
+    align-items: center;
+    text-align: center;
+}
