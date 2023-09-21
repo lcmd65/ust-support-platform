@@ -10,14 +10,21 @@ body {
 }
 
 .card-body {
+    text-align: center;
+}
+
+.wrap-login {
     margin-top: 100px;
 }
 
 .icon {
     background: url("images/color_logo.png");
-    height: 20px;
-    width: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 80px;
     display: block;
+    align-self: center;
 }
 
 .login-form {
