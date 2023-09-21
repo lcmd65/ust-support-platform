@@ -9,63 +9,67 @@
 <!--===============================================================================================-->	
 </head>
 <body>
-<main class="login-form">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Login</div>
-                    <div class="card-body">
-						<form action="/login/" method = post>
+	<main class="login-form">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">Sign In</div>
+						<div class="card-body">
 							<span class='icon'></span>
-							<div class="wrap-login">
-								<div class = "wrap-label">
-									<p> Username</p>
-								</div>
-								<div class="wrap-input-entry" data-validate = "Username">
-									<input class="input100" type="userame" name="user" value="{{
-										request.form.username}}">
-									<span class="focus-input100" data-placeholder="Username"></span>
-								</div>
-								<div class = "wrap-label">
-									<p> Password</p>
-								</div>
-								<div class="wrap-input-entry" data-validate="Enter password">
-									<span class="btn-show-pass">
-										<i class="zmdi zmdi-eye"></i>
-									</span>
-									<input class="input100" type="password" name="pass" value="{{
-										request.form.password }}">
-									<span class="focus-input100" data-placeholder="Password"></span>
-								</div>
-								<div class="container-login100-form-btn">
-									<div class="wrap-login100-form-btn">
-										<div class="login100-form-bgbtn"></div>
-											<button class="login100-form-btn" type="submit" value="login">
-												Login
-											</button>
+							<form action="/login/" method = post>
+								<div class="wrap-login">
+									<div class = "wrap-entry">
+										<div class = "wrap-label">
+											<p> Username</p>
+										</div>
+										<div class="wrap-input-entry" data-validate = "Username">
+											<input class="input100" type="userame" name="user" value="{{
+												request.form.username}}">
+											<span class="focus-input100" data-placeholder="Username"></span>
+										</div>
+										<div class = "wrap-label">
+											<p> Password</p>
+										</div>
+										<div class="wrap-input-entry" data-validate="Enter password">
+											<span class="btn-show-pass">
+												<i class="zmdi zmdi-eye"></i>
+											</span>
+											<input class="input100" type="password" name="pass" value="{{
+												request.form.password }}">
+											<span class="focus-input100" data-placeholder="Password"></span>
 										</div>
 									</div>
-									<div class="text-center p-t-115">
-										<span class="txt1">
-											Don’t have an account?
-										</span>
-
-										<a class="txt2" href="#">
-											Sign Up
-										</a>
+									<div class="container-login100-form-btn">
+										<div class="wrap-login100-form-btn">
+											<div class="login100-form-bgbtn"></div>
+												<button class="login100-form-btn" type="submit" value="login">
+													Sign In
+												</button>
+											</div>
+										</div>
+										<div class="text-center-p">
+											<a class="txt1" href = "{{ url_for('my_blueprint.forgotPassword') }}">
+												Forgot Password?
+											</a>
+											<a class="txt2" href="#">
+												Sign Up
+											</a>
+										</div>
+										{% if error %}
+											<p class="error"><strong>Error:</strong> {{ error }}
+										{% endif %}
 									</div>
-									{% if error %}
-										<p class="error"><strong>Error:</strong> {{ error }}
-									{% endif %}
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>	
+			</div>	
+		</div>
+	</main>
+	<div class = "fixed-box">
+		<div class = "label-policy">Privacy @2023</div>
 	</div>
-</main>
 </body>
 </html>

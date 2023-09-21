@@ -9,8 +9,18 @@ body {
     background-color: #ececec;
 }
 
+.card {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+}
+
 .card-body {
-    text-align: center;
+    align-items: center;
+    align-content: center;
+    vertical-align: center;
 }
 
 .wrap-login {
@@ -41,16 +51,22 @@ body {
     margin-right: 0;
 }
 
+.wrap-entry {
+    margin-top: 25px;
+}
+
 .wrap-label {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 6px;
     align-self: center;
     text-align: center;
+    font-size: small;
 }
 
 .wrap-input-entry {
     align-self: center;
     text-align: center;
+    margin-top: 5px;
 }
 
 .input100 {
@@ -60,4 +76,62 @@ body {
     text-align: left;
     height: 25px;
     font-size: smaller;
+}
+
+.wrap-login100-form-btn {
+    text-align: right;
+    vertical-align: right;
+}
+
+.login100-form-btn {
+    width: 150px;
+    font-size: small;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #4f67d1;
+    color: white;
+    margin-top: 15px;
+}
+
+.login100-form-btn:hover {
+    background-color: #15256e;
+}
+
+.login100-form-btn:placeholder {
+    background-color: #15256e;
+}
+
+.txt1 {
+    font-size: small;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.txt2 {
+    font-size: small;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: right;
+}
+
+.fixed-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    height: 35px;
+    background-color: #ececec;
+}
+
+.label-policy {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: left;
+    position: relative;
+    font-size: small;
 }

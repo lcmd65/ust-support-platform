@@ -1,0 +1,14 @@
+.body {
+    margin-top: 25%;
+    background-color: #ececec;
+}
+
+.card {
+    padding: 100px;
+    text-align: left;
+    min-width: 800px;
+    min-height: 1000px;
+    margin: auto;
+    display: table;
+    background-color: #ececec;
+}

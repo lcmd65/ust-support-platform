@@ -21,6 +21,11 @@ def login():
             return render_template("auth/login.html", error="Invalid username or password.")
     return render_template('auth/login.html', error = error)
 
+@my_blueprint.route("/forgot/",  methods = ['GET', 'POST'])
+def forgotPassword():
+    return render_template("auth/forgot.html")
+    
+
 @my_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
     try:
