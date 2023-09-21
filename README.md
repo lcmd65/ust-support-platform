@@ -16,3 +16,7 @@ chat assistant web platform (flask)
 
 ### URL link:
         None
+### App
+
+<img width="400" alt="Screenshot 2023-09-21 at 16 48 57" src="https://github.com/lcmd65/assistant-dsc.web/assets/93373784/21691b26-4dca-426a-bea3-aa9bc7b5fed6">
+
