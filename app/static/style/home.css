@@ -194,10 +194,16 @@ body {
     text-align: left;
 }
 
-.nohcel-home-function {
+.container-list-home-function {
     border-radius: 8px;
     align-self: center;
     align-items: left;
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    margin-left: 5%;
 }
 
 .container-login100 {
@@ -209,4 +215,23 @@ body {
 .container-username {
     font-size: small;
     color: #ffffff;
+}
+
+.fixed-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    height: 30px;
+    background-color: #ececec;
+}
+
+.label-policy {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: left;
+    position: relative;
+    font-size: small;
 }

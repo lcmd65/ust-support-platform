@@ -1,4 +1,7 @@
 from app import db
+from PIL import Image
+import base64
+import io
 
 class Request():
     def __init__(self):
@@ -18,7 +21,7 @@ class User():
         self.requests = []
         
         self.parsingIDRequest()
-        self.parsingIDImage()
+        self.connectIDImage()
     
     def parsingIDRequest(self):
         from app import db
@@ -27,9 +30,15 @@ class User():
             if item["id"] == str(self.id):
                 self.requests.append(item)
     
-    def parsingIDImage(self):
+    def connectIDImage(self):
         from app import db
         self.image = db.connectUserImage(self.id)
+    
+    def parsingIDImage(self):
+        try:
+            self.image =  Image.open(io.BytesIO(base64.b64decode(self.image)))
+        except Exception as e:
+            print(e)
     
     def updateRequest(self):
         self.requests.clear()

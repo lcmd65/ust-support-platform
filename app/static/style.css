@@ -4,7 +4,7 @@
  */
 
 body {
-    background: #2d2d7f !important;
+    background: #7366878f !important;
 }
 
 
@@ -18,7 +18,7 @@ body {
 #mainMenu li>a {
     font-size: 12px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #120662;
     font-weight: 400;
     position: relative;
     z-index: 1;
@@ -26,7 +26,7 @@ body {
 }
 
 .main-header.fixed-nav #mainMenu li>a {
-    color: #fff;
+    color: #120662;
     text-decoration: none;
 }
 
@@ -39,7 +39,7 @@ body {
     content: "";
     width: calc(100% - 1px);
     height: 1px;
-    background: #fff;
+    background: #120662;
     bottom: -6px;
     left: 0;
     -webkit-transform: scale(0, 1);
@@ -188,4 +188,79 @@ body {
         background-color: #fff;
     }
     /*header ends*/
+}
+
+.collapse .navbar-collapse {
+    text-align: left;
+}
+
+.container-list-home-function {
+    margin-top: 5%;
+    border-radius: 8px;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    margin-left: 5%;
+}
+
+.container-button {
+    margin-left: 5%;
+    margin-bottom: 5%;
+    margin-top: 700px;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 10px;
+    font-weight: 600;
+    width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+    transition: 0.4s;
+}
+
+.reg {
+    color: white;
+    background-color: rgba(104, 85, 224, 1);
+}
+
+.log {
+    color: rgb(104, 85, 224);
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(104, 85, 224, 1);
+}
+
+button:hover {
+    color: white;
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+    background-color: rgba(104, 85, 224, 1);
+}
+
+.fixed-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    height: 30px;
+    background-color: #ececec;
+}
+
+.label-policy {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: left;
+    position: relative;
+    font-size: small;
 }

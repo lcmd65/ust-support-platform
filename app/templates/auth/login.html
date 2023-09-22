@@ -17,7 +17,7 @@
 						<div class="card-header">Sign In</div>
 						<div class="card-body">
 							<span class='icon'></span>
-							<form action="/login/" method = post>
+							<form action="/login" method = post>
 								<div class="wrap-login">
 									<div class = "wrap-entry">
 										<div class = "wrap-label">
@@ -49,10 +49,10 @@
 											</div>
 										</div>
 										<div class="text-center-p">
-											<a class="txt1" href = "{{ url_for('my_blueprint.forgotPassword') }}">
+											<a class="txt1" href = "{{ url_for('auth_blueprint.forgotPassword') }}">
 												Forgot Password?
 											</a>
-											<a class="txt2" href="{{ url_for('my_blueprint.register') }}">
+											<a class="txt2" href="{{ url_for('auth_blueprint.register') }}">
 												Sign Up
 											</a>
 										</div>

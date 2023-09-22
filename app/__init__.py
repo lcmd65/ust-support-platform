@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, Blueprint
+from flask import Flask, redirect, Blueprint, render_template
 
 class AppVariable():
     def __init__(self):
@@ -11,10 +11,10 @@ class AppVariable():
 application = AppVariable()
 
 def create_app(test_config=None):
-    from .auth.routes import my_blueprint
+    from .auth.routes import auth_blueprint
     from .blog.routes import home_blueprint
     # create and configure the app
-    application._app.register_blueprint(my_blueprint)
+    application._app.register_blueprint(auth_blueprint)
     application._app.register_blueprint(home_blueprint)
     application._app.config.from_mapping(
         SECRET_KEY='dev',
@@ -35,8 +35,8 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @application._app.route('/')
+    @application._app.route('/nohcel')
     def main():
-        return redirect('/login/')
+        return render_template("base.html")
 
     return application._app

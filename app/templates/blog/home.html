@@ -39,10 +39,10 @@
                     </div>
                 </nav>
                 <div class = "navbar-userinfo">
-                <div class ="container-user-image" data-app-image = "{{app_image}}"> 
-                    {% if app_image %}
-                        <img src= {{app_image}} >
-                    {% endif%}
+                <div class ="container-user" > 
+                    <div class= "container-user-image" data-app-image = "{{app_image}}">
+                        <img src="data:image/jpg;base64, {{app_image}}"/>
+                    </div>
                     <div class ="container-username" data-app-username="{{app_username}}">
                         <p class "container-username-text" type ="text">
                             {{app_username}}
@@ -55,12 +55,13 @@
             <div class = "nohcel-home">
                 <div class ="container-user">
                         <div class="container-list-home-function">
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{ url_for('static',filename='style/images/chatbox.jpg') }}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nohcel Box Assitant</h5>
-                                    <p class="card-text">Hỗ trợ xử lí yêu cầu và câu hỏi sinh viên trực tiếp. Quản lý bởi quản trị viên hệ thống</p>
-                                    <a href="#" class="btn btn-primary">Đi tới</a>
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{ url_for('static',filename='style/images/chatbox.jpg') }}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nohcel Box Assitant</h5>
+                                        <p class="card-text">Hỗ trợ xử lí yêu cầu và câu hỏi sinh viên trực tiếp. Quản lý bởi quản trị viên hệ thống</p>
+                                        <a href="#" class="btn btn-primary">Đi tới</a>
+                                    </div>
                                 </div>
                                 <div class="card" style="width: 18rem;">
                                     <img src="{{ url_for('static',filename='style/images/chatbot.jpg') }}" class="card-img-top" alt="...">
@@ -83,7 +84,9 @@
                 </div>
             </div>
         </header>
-        
+        <div class = "fixed-box">
+            <div class = "label-policy">Privacy @2023</div>
+        </div>
         <script src="" async defer></script>
     </body>
 </html>

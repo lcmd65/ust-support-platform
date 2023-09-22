@@ -6,9 +6,9 @@ from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from app.auth.controllers import controlAuth
 
-my_blueprint = Blueprint('my_blueprint', __name__)
+auth_blueprint = Blueprint('auth_blueprint', __name__)
 
-@my_blueprint.route("/login/",  methods = ['GET', 'POST'])
+@auth_blueprint.route("/login",  methods = ['GET', 'POST'])
 def login():
     import app
     error = None
@@ -24,7 +24,7 @@ def login():
             return render_template("auth/login.html", error="Invalid username or password.")
     return render_template('auth/login.html', error = error)
 
-@my_blueprint.route("/forgot/",  methods = ['GET', 'POST'])
+@auth_blueprint.route("/forgot",  methods = ['GET', 'POST'])
 def forgotPassword():
     import app
     error = None
@@ -43,7 +43,7 @@ def forgotPassword():
     return render_template("auth/forgot.html", error = error)
     
 
-@my_blueprint.route("/register/", methods = ['GET', 'POST'])
+@auth_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
     try:
         import app
@@ -65,5 +65,14 @@ def register():
     except Exception as e:
         return render_template("auth/register.html", error = e)
     
-
+@auth_blueprint.route("/base",  methods = ['GET','POST'])
+def base():
+    if request.method == "POST":
+        button_name = request.form.get("button")
+        if button_name == "login":
+            return redirect('/login')
+        elif button_name == "register":
+            return redirect('/register')
+    return render_template("base.html")
+    
 
