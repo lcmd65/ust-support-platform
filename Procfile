@@ -1,1 +1,1 @@
-web: gunicorn app:create_app()
+web: gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
