@@ -1,4 +1,13 @@
-flask
-pymongo
 Jinja2
-
+MarkupSafe
+Werkzeug
+blinker
+click
+dnspython
+flask
+itsdangerous
+pymongo
+pillow
+nltk
+gensim
+transformers
