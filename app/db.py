@@ -127,5 +127,19 @@ def connectUserImage(id):
     for item in documents:
         if str(item["id"]) == str(id):
             return item["image"]
+        
+def userAuthenticationChange(account, email, password):
+    # Send a ping to confirm a successful connection
+    app.application._client.admin.command('ping')
+    db = app.application._client["User"]
+    collection = db["User_info"]
+    documents = collection.find()
+    for item in documents:
+        if item["username"] == account and item["email"] == email:
+            collection.update_one({"_id": item["_id"]}, {"password": password})
+            return True
+    return False
+            
+    
             
 ##### combine MySQL and MongoDB in Program Processing#########################################################################################

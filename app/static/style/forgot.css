@@ -44,6 +44,11 @@
     vertical-align: right;
 }
 
+.input100 {
+    width: auto;
+    position: relative;
+}
+
 .wrap-forgot-btn {
     text-align: right;
     vertical-align: right;

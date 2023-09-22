@@ -189,24 +189,3 @@ body {
     }
     /*header ends*/
 }
-
-.collapse .navbar-collapse {
-    text-align: left;
-}
-
-.nohcel-home-function {
-    border-radius: 8px;
-    align-self: center;
-    align-items: left;
-}
-
-.container-login100 {
-    vertical-align: middle;
-    border-radius: 8px;
-    align-self: center;
-}
-
-.container-username {
-    font-size: small;
-    color: #ffffff;
-}

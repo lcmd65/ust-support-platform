@@ -1,16 +1,13 @@
 import os
 from flask import Flask, redirect, Blueprint
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
-
 
 class AppVariable():
     def __init__(self):
         self._app = Flask(__name__, instance_relative_config=True)
         self._uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
-        self._client = MongoClient(self._uri, server_api=ServerApi('1'))
+        self._client = None
         self._user = None
-    
+        
 application = AppVariable()
 
 def create_app(test_config=None):
