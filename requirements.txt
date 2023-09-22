@@ -1,4 +1,4 @@
-blinkera
+
 certifi
 charset-normalizer
 click
