@@ -12,7 +12,7 @@ from db import connectMongoEmbedded
 import openai
 
 def api():
-    with open("api_key.json") as file:
+    with open("app/api_key.json") as file:
         data = json.load(file)
         return data["api-key"]
     
