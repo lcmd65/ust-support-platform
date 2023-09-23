@@ -34,9 +34,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @application._app.route('/nohcel')
+    # a base page
+    @application._app.route('/')
     def main():
+        return render_template("base.html")
+    
+    @application._app.route('/nohcel')
+    def nohcel():
         return render_template("base.html")
 
     return application._app
