@@ -1,2 +1,2 @@
 # Run command
-web: gunicorn -w 4 wsgi:app
+web: gunicorn -c config.py wsgi:app

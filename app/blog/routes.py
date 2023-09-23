@@ -1,3 +1,4 @@
+#blogging main function of nohcel application
 from flask import Blueprint
 from flask import request, render_template, redirect, url_for
 
