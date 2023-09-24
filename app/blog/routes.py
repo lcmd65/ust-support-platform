@@ -25,8 +25,21 @@ def homeChatbox():
     return render_template("blog/chatbox.html", user_name= app.application._user.username,\
         user_image = app.application._user.image,\
         tree_request = app.application._user.requests)
-
-
+    
+@home_blueprint.route("chatbox/<tree_item>", methods = ['GET', 'POST'])
+def homeChatboxClick(tree_item):
+    import app
+    treeItemId = tree_item
+    tree = None
+    for item in app.application._user.requests:
+        if item["_id"] == treeItemId:
+            tree = item
+            break
+    return render_template("blog/chatbox.html", user_name= app.application._user.username,\
+        user_image = app.application._user.image,\
+        tree_request = app.application._user.requests,\
+        item_request = tree)
+    
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():
     import app

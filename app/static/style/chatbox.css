@@ -202,6 +202,7 @@ body {
 .nohcel-chatbox {
     background-color: #ececec;
     height: 100vh;
+    display: block;
 }
 
 .pure-tree {
@@ -266,9 +267,20 @@ body {
     }
 }
 
+.container-user {
+    display: inline-block;
+    margin-left: 70%;
+    flex-direction: row;
+}
+
+.container-username {
+    color: #ffffff;
+}
+
 .container-nohcel-chatbox-workspace {
     flex-direction: row;
     display: flex;
+    height: 90vh;
 }
 
 .container-nohcel-chatbox-tree {
@@ -283,11 +295,35 @@ body {
 .container-nohcel-chatbox-tree-name {
     text-align: center;
     font-size: larger;
-    background-color: #0d2659;
+    background-color: #060a12;
     color: #ffffff;
 }
 
 .container-nohcel-chatbox-view {
-    display: block;
-    background-color: #ffffff
+    background-color: #ffffff;
+    font-size: small;
+    margin-left: 5%;
+    margin-top: 100px;
+    border-radius: 8px;
+    width: 110vh;
+    margin-right: 0%;
+}
+
+.fixed-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    height: 30px;
+    background-color: #bbbbbb;
+}
+
+.label-policy {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: left;
+    position: relative;
+    font-size: small;
 }

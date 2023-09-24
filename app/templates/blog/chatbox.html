@@ -23,7 +23,7 @@
                             <li><a href="#">Settings</a></li>
                             <li><a href="#">Exit</a></li>
                         </ul>
-                        <div>
+                        <div class = "container-user">
                             <div class ="container-user-image">
                                 {% if user_image %}
                                 <img src= {{user_image}} >
@@ -46,20 +46,22 @@
                                 Requests
                             </p> 
                         </div>
-                        <ul id="compositions-list" class ="pure-tree main-tree">
-                            {% for item in tree_request %}
-                                <ul class = "pure-tree">
-                                    <li class="pure-tree_link">
-                                        <a title="" target="_blank">{{item["subject"]}}</a>
-                                    </li>
-                                </ul>
-                            {% endfor %}
-                        </ul>
+                        <form action = "/chatbox" method = post>
+                            <ul id="compositions-list" class ="pure-tree main-tree"> 
+                                {% for item in tree_request %}
+                                        <li class="pure-tree_link">
+                                            <a href="chatbox/tree_item/{{item["_id"]}}" target="_blank" onclick="eventClickTreeItem()">{{item["subject"]}}</a>
+                                        </li>
+                                {% endfor %}
+                            </ul>
+                        </form>
                     </div>
                     <div class = "container-nohcel-chatbox-view">
-                        <div class ="button-bar">
-                            
-                        </div>
+                        <form action = "/chatbox/<tree_item>" method = post>
+                            <button class ="button-bar" name = "button" value = "init">
+                                <li><a>Tạo request mới</a></li>
+                            </button>
+                        </form>
                         <div class = "request-item-vew">
                             {%if item_request %}
                                 <div class = "item-subject">
@@ -75,6 +77,9 @@
                         </div> 
                     </div>
                 </form>
+        </div>
+        <div class = "fixed-box">
+            <div class = "label-policy">Privacy @2023</div>
         </div>
         <script src="" async defer></script>
     </body>
