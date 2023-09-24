@@ -21,7 +21,7 @@
                     <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li>
-                        <a href="#home" class="active active-first">Back</a>
+                        <a href="/login" class="active active-first">Back to Login</a>
                         </li>
                         <li>
                         <a href="#about">Help</a>
@@ -54,30 +54,35 @@
             <!-- /.container -->
             <div class = "nohcel-home">
                 <div class ="container-user">
-                        <div class="container-list-home-function">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='style/images/chatbox.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nohcel Box Assitant</h5>
-                                        <p class="card-text">Hỗ trợ xử lí yêu cầu và câu hỏi sinh viên trực tiếp. Quản lý bởi quản trị viên hệ thống</p>
-                                        <a href="#" class="btn btn-primary">Đi tới</a>
-                                    </div>
+                    <div class="container-list-home-function">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ url_for('static',filename='style/images/chatbox.jpg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nohcel Box Assitant</h5>
+                                    <p class="card-text">Hỗ trợ xử lí yêu cầu và câu hỏi sinh viên trực tiếp. Quản lý bởi quản trị viên hệ thống</p>
+                                    <form action = "/home" method = post>
+                                        <button class="btn btn-primary" type = "submit" name = "button" value ="chatbox">Đi tới</button>
+                                    </form>
                                 </div>
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='style/images/chatbot.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nohcel Chatbot</h5>
-                                        <p class="card-text">API mô hình ngôn ngữ lớn được đào tào few - shot từ dữ liệu nội bộ.</p>
-                                        <a href="#" class="btn btn-primary">Đi tới</a>
-                                    </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ url_for('static',filename='style/images/chatbot.jpg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nohcel Chatbot</h5>
+                                    <p class="card-text">API mô hình ngôn ngữ lớn được đào tào few - shot từ dữ liệu nội bộ.</p>
+                                    <form action = "/home" method = post>
+                                        <button class="btn btn-primary" type = "submit" name = "button" value ="chatbot">Đi tới</button>
+                                    </form>
                                 </div>
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='style/images/speechtotext.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nohcel Speech to Text</h5>
-                                        <p class="card-text">Hệ thống Speech To Text, kết hợp mô hình ngôn ngữ và mô hình Audio.</p>
-                                        <a href="#" class="btn btn-primary">Đi tới</a>
-                                    </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ url_for('static',filename='style/images/speechtotext.jpg') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nohcel Speech to Text</h5>
+                                    <p class="card-text">Hệ thống Speech To Text, kết hợp mô hình ngôn ngữ và mô hình Audio.</p>
+                                    <form action = "/home" method = post>
+                                        <button class="btn btn-primary" type = "submit" name = "button" value ="speechtotext">Đi tới</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,7 @@ def login():
         password = request.values['pass']
         bool = db.userAuthentication(username, password)
         if bool == True:
-            app.application_user = controlAuth(username, password)
+            controlAuth(username, password)
             return redirect("/home")
         else: 
             return render_template("auth/login.html", error="Invalid username or password.")
@@ -34,7 +34,6 @@ def forgotPassword():
         email = request.values['email']
         new_pass = request.values['new_password']
         confirm_pass = request.values['confirm_new_password']
-
         if new_pass == confirm_pass:
             boolean = db.userAuthenticationChange(username,email, new_pass)
             if boolean == True:
