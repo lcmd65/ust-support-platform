@@ -1,5 +1,6 @@
 import os
 from flask import Flask, redirect, Blueprint, render_template
+from flask_sqlalchemy import SQLAlchemy
 
 class AppVariable():
     def __init__(self):
@@ -7,12 +8,17 @@ class AppVariable():
         self._uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
         self._client = None
         self._user = None
-        
+
 application = AppVariable()
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    email = db.Column(db.String(128))
 
 def create_app(test_config=None):
     from .auth.routes import auth_blueprint
     from .blog.routes import home_blueprint
+    application = AppVariable()
     # create and configure the app
     application._app.register_blueprint(auth_blueprint)
     application._app.register_blueprint(home_blueprint)
@@ -21,6 +27,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(application._app.instance_path, 'flaskr.sqlite'),
     )
     application._app.config.from_pyfile("config.py")
+    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite3'
     if test_config is None:
         # load the instance config, if it exists, when not testing
         application._app.config.from_pyfile('config.py', silent=True)

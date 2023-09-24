@@ -30,3 +30,4 @@ typing_extensions
 urllib3
 Werkzeug
 pandas
+flask-sqlalchemy
