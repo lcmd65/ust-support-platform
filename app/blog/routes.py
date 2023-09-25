@@ -1,6 +1,11 @@
-#blogging main function of nohcel application
+#blogging main function of nohg.application
 from flask import Blueprint
-from flask import request, render_template, redirect, url_for
+from flask import (
+    request,
+    render_template,
+    redirect,
+    url_for,
+    g)
 
 home_blueprint = Blueprint('home_blueprint', __name__)
             
@@ -16,8 +21,8 @@ def home():
             return redirect("/chatbot")
         else:
             return redirect("/speechtotext")
-    return render_template("blog/home.html", app_username = app.application._user.username,\
-        app_image = app.application._user.image)
+    return render_template("blog/home.html", app_username = g.application._user.username,\
+        app_image = g.application._user.image)
 
 @home_blueprint.route("/chatbox", methods = ['GET', 'POST'])
 def homeChatbox():
@@ -26,27 +31,27 @@ def homeChatbox():
         tree = None
         button = None
         id = request.form.get("option")
-        for item in app.application._user.requests:
+        for item in g.application._user.requests:
             if item["_id"] == id:
                 tree = item
                 break
         if tree != None:
-            return render_template("blog/chatbox.html", user_name= app.application._user.username,\
-            user_image = app.application._user.image,\
-            tree_request = app.application._user.requests,\
+            return render_template("blog/chatbox.html", user_name= g.application._user.username,\
+            user_image = g.application._user.image,\
+            tree_request = g.application._user.requests,\
             item_request = tree,\
             item_new = None)
         elif tree == None:
             button = request.form.get("button")
             if button == "init":
-                return render_template("blog/chatbox.html", user_name= app.application._user.username,\
-                user_image = app.application._user.image,\
-                tree_request = app.application._user.requests,\
+                return render_template("blog/chatbox.html", user_name= g.application._user.username,\
+                user_image = g.application._user.image,\
+                tree_request = g.application._user.requests,\
                 item_request = None,\
                 item_new = button)
-    return render_template("blog/chatbox.html", user_name= app.application._user.username,\
-            user_image = app.application._user.image,\
-            tree_request = app.application._user.requests,\
+    return render_template("blog/chatbox.html", user_name= g.application._user.username,\
+            user_image = g.application._user.image,\
+            tree_request = g.application._user.requests,\
             item_request = None,\
             item_new = None)
     

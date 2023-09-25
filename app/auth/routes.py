@@ -1,6 +1,11 @@
-# authentication function of nohcel.application
-from flask import Blueprint
-from flask import request, render_template, redirect, url_for
+# authentication function of nohg.application
+from flask import (\
+    Blueprint,
+    request,
+    render_template,
+    redirect,
+    url_for,
+    g)
 from app import db
 from app.auth.models import User
 from pymongo import MongoClient
@@ -14,7 +19,7 @@ def login():
     import app
     error = None
     if request.method == "POST":
-        app.application._client = MongoClient(app.application._uri, server_api=ServerApi('1'))
+        g.application._client = MongoClient(g.application._uri, server_api=ServerApi('1'))
         username = request.values['user'] 
         password = request.values['pass']
         bool = db.userAuthentication(username, password)
@@ -48,7 +53,7 @@ def register():
     try:
         import app
         if request.method == "POST":
-            app.application._client = MongoClient(app.application._client._uri, server_api=ServerApi('1'))
+            g.application._client = MongoClient(g.application._client._uri, server_api=ServerApi('1'))
             username = request.values['user'] 
             password = request.values['pass']
             confirm_password = request.values['confirm_password']

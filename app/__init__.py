@@ -1,53 +1,49 @@
 import os
-from flask import Flask, redirect, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask import g, session
 
 class AppVariable():
     def __init__(self):
-        self._app = Flask(__name__, instance_relative_config=True)
         self._uri = "mongodb+srv://datlemindast:Minhdat060501@cluster0.ixcliyp.mongodb.net/?retryWrites=true&w=majority"
         self._client = None
         self._user = None
 
-application = AppVariable()
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
-    email = db.Column(db.String(128))
-
 def create_app(test_config=None):
     from .auth.routes import auth_blueprint
     from .blog.routes import home_blueprint
-    application = AppVariable()
+    app = Flask(__name__, instance_relative_config=True)
     # create and configure the app
-    application._app.register_blueprint(auth_blueprint)
-    application._app.register_blueprint(home_blueprint)
-    application._app.config.from_mapping(
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(home_blueprint)
+    app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(application._app.instance_path, 'flaskr.sqlite'),
+        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
-    application._app.config.from_pyfile("config.py")
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite3'
+    app.config.from_pyfile("config.py")
+    g.application = AppVariable()
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        application._app.config.from_pyfile('config.py', silent=True)
+        app.config.from_pyfile('config.py', silent=True)
     else:
         # load the test config if passed in
-        application._app.config.from_mapping(test_config)
+        app.config.from_mapping(test_config)
 
     # ensure the instance folder exists
     try:
-        os.makedirs(application._app.instance_path)
+        os.makedirs(app.instance_path)
     except OSError:
         pass
 
     # a base page
-    @application._app.route('/')
+    @app.route('/')
     def main():
         return render_template("base.html")
-    
-    @application._app.route('/nohcel')
+    @app.route('/nohcel')
     def nohcel():
         return render_template("base.html")
+    return app
 
-    return application._app
+
+
+

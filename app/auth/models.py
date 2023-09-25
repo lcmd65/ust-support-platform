@@ -1,4 +1,3 @@
-from app import db
 from PIL import Image
 import base64
 import io
