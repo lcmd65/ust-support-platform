@@ -12,7 +12,6 @@ home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route("/home",methods = ['GET', 'POST'])
 def home():
-    import app
     if request.method == "POST":
         button_value = request.form.get("button")
         if button_value == "chatbox":
@@ -26,7 +25,6 @@ def home():
 
 @home_blueprint.route("/chatbox", methods = ['GET', 'POST'])
 def homeChatbox():
-    import app
     if request.method == "POST":
         tree = None
         button = None
@@ -57,12 +55,10 @@ def homeChatbox():
     
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():
-    import app
     return render_template("blog/chatbot.html")
 
 @home_blueprint.route("/speechtotext", methods = ['GET', 'POST'])
 def homeSpeechToText():
-    import app
     return render_template("blog/speechtotext.html")
 
 

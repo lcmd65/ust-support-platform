@@ -5,21 +5,21 @@ from flask import (\
     render_template,
     redirect,
     url_for,
+    current_app,
     g)
 from app import db
 from app.auth.models import User
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from app.auth.controllers import controlAuth
-
 auth_blueprint = Blueprint('auth_blueprint', __name__)
 
 @auth_blueprint.route("/login",  methods = ['GET', 'POST'])
 def login():
-    import app
     error = None
     if request.method == "POST":
-        g.application._client = MongoClient(g.application._uri, server_api=ServerApi('1'))
+        link = g.application._uri
+        g.application._client = MongoClient(link, server_api=ServerApi('1'))
         username = request.values['user'] 
         password = request.values['pass']
         bool = db.userAuthentication(username, password)
@@ -32,7 +32,6 @@ def login():
 
 @auth_blueprint.route("/forgot",  methods = ['GET', 'POST'])
 def forgotPassword():
-    import app
     error = None
     if request.method == "POST":
         username = request.values['user'] 
@@ -51,7 +50,6 @@ def forgotPassword():
 @auth_blueprint.route("/register", methods = ['GET', 'POST'])
 def register():
     try:
-        import app
         if request.method == "POST":
             g.application._client = MongoClient(g.application._client._uri, server_api=ServerApi('1'))
             username = request.values['user'] 

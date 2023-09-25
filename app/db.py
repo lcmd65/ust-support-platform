@@ -9,6 +9,7 @@ import requests
 import bson
 from bson.binary import Binary
 import app
+from flask import g
 
 ###### Mongo ####################################################################################################################################
 
@@ -26,14 +27,15 @@ def addIPtoMongodbAtlas(ip_address):
         print(e)
         
 def getClient():
-    app.application._client = MongoClient(app.application._uri, server_api=ServerApi('1'))
+    link = g.application._uri
+    g.application._client = MongoClient(link, server_api=ServerApi('1'))
 
 def connectMongoEmbedded():
     addIPtoMongodbAtlas(getIPAddress())
     # Send a ping to confirm a successful connection
     try:
-        app.application._client.admin.command('ping')
-        db = app.application._client["Nohcel_Dataset"]
+        g.application._client.admin.command('ping')
+        db = g.application._client["Nohcel_Dataset"]
         collection = db["embedded_dataset"]
         documents = collection.find()
         return documents
@@ -43,8 +45,8 @@ def connectMongoEmbedded():
 ## register user    
 def addUserMongoDB(username, email, password, id , gender):
     getClient()
-    app.application._client.admin.command('ping')
-    db = app.application._client["User"]
+    g.application._client.admin.command('ping')
+    db = g.application._client["User"]
     ## processing User basic infomation
     collection = db["User_info"]
     user = collection.find()
@@ -81,7 +83,7 @@ def pushRequestToMongo(id, subject_text, request_text):
             "request": str(request_text),
             "respone": "",
         }
-    db = app.application._client["User"]
+    db = g.application._client["User"]
     collection = db["Request"]
     collection.insert_one(document)
     return document
@@ -90,8 +92,8 @@ def pushRequestToMongo(id, subject_text, request_text):
 def connectUserRequest():
     getClient()
     try:
-        app.application._client.admin.command('ping')
-        section_database = app.application._client["User"]
+        g.application._client.admin.command('ping')
+        section_database = g.application._client["User"]
         collection_section = section_database["Request"]
         requests = collection_section.find()
         return requests
@@ -100,7 +102,7 @@ def connectUserRequest():
         
 def userParsing(account,password):
     getClient()
-    db = app.application._client["User"]
+    db = g.application._client["User"]
     collection = db["User_info"]
     documents = collection.find()
     for item in documents:
@@ -111,8 +113,8 @@ def userParsing(account,password):
 def userAuthentication(account, password):
     addIPtoMongodbAtlas(getIPAddress())
     # Send a ping to confirm a successful connection
-    app.application._client.admin.command('ping')
-    db = app.application._client["User"]
+    g.application._client.admin.command('ping')
+    db = g.application._client["User"]
     collection = db["User_info"]
     documents = collection.find()
     for item in documents:
@@ -121,7 +123,7 @@ def userAuthentication(account, password):
     return False
 
 def connectUserImage(id):
-    db = app.application._client["User"]
+    db = g.application._client["User"]
     collection = db["Image"]
     documents = collection.find()
     for item in documents:
@@ -130,8 +132,8 @@ def connectUserImage(id):
         
 def userAuthenticationChange(account, email, password):
     # Send a ping to confirm a successful connection
-    app.application._client.admin.command('ping')
-    db = app.application._client["User"]
+    g.application._client.admin.command('ping')
+    db = g.application._client["User"]
     collection = db["User_info"]
     documents = collection.find()
     for item in documents:
