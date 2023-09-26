@@ -7,14 +7,18 @@ from flask import (
     url_for,
     g)
 import app.cache
+import json
 from app import db
+from app.auth.models import User, dbModel
 
 home_blueprint = Blueprint('home_blueprint', __name__)
             
 
 @home_blueprint.route("/home",methods = ['GET', 'POST'])
 def home():
-    user = app.cache.cache.get('database')
+    model = json.loads(app.cache.cache.get('database'))
+    user = User(None, None, None, None, None)
+    user.initFromUser(model)
     if request.method == "POST":
         button_value = request.form.get("button")
         if button_value == "chatbox":
@@ -24,16 +28,18 @@ def home():
         else:
             return redirect("/speechtotext")
     return render_template("blog/home.html", app_username = user.username,\
-        app_image = user._user.image)
+        app_image = user.image)
 
 @home_blueprint.route("/chatbox", methods = ['GET', 'POST'])
 def homeChatbox():
+    tree = None
+    button = None
+    model = json.loads(app.cache.cache.get('database'))
+    user = User(None, None, None, None, None)
+    user.initFromUser(model)
+    data_base = db.DB()
+    data_base.getUser(user)
     if request.method == "POST":
-        tree = None
-        button = None
-        user = app.cache.cache.get('database')
-        data_base = db.DB()
-        data_base.getUser(user)
         id = request.form.get("option")
         for item in data_base._user.requests:
             if item["_id"] == id:

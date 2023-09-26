@@ -16,15 +16,36 @@ class User():
         self.role = None
         self.requests = []
     
-    def initFormUser(self, user):
+    def initFromUser(self, user):
+        self.username = user['username']
+        self.password = user['password']
+        self.email = user['email']
+        self.id = user['id']
+        self.gender = user['gender']
+        self.role = user['role']
+        self.requests = user['requests']
+        
+class dbModel():
+    def __init__(self, user):
         self.username = user.username
         self.password = user.password
         self.email = user.email
         self.id = user.id
         self.gender = user.gender
-        self.image = user.image
         self.role = user.role
         self.requests = user.requests
+    
+    def __dict__(self):
+        return {
+            "username": self.username,
+            "password": self.password,
+            "email": self.email,
+            "id": self.id,
+            "gender": self.gender,
+            "role": self.role,
+            "requests": self.requests,
+        }
+    
 
         
 

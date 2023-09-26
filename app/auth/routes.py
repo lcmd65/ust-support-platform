@@ -8,7 +8,7 @@ from flask import (\
     current_app,
     g)
 from app import db
-from app.auth.models import User
+from app.auth.models import User, dbModel
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from app.auth.controllers import controlAuth
@@ -26,11 +26,12 @@ def login():
         password = request.values['pass']
         user = User(username, password, None, None, None)
         data_base = db.DB()
-        data_base.getUser(User)
+        data_base.getUser(user)
         bool = data_base.userAuthentication(username, password)
         if bool == True:
             data_base.parsingUser()
-            app.cache.cache.set('database', json.dumps(data_base._user))
+            model = dbModel(data_base._user)
+            app.cache.cache.set('database', json.dumps(model.__dict__()))
             return redirect("/home")
         else: 
             return render_template("auth/login.html", error="Invalid username or password.")
@@ -49,7 +50,8 @@ def forgotPassword():
             data_base = db.DB()
             data_base.getUser(user)
             boolean = data_base.userAuthenticationChange(username, email, new_pass)
-            app.cache.cache.set('database', json.dumps(data_base._user))
+            model = dbModel(data_base._user)
+            app.cache.cache.set('database', json.dumps(model.__dict__()))
             if boolean == True:
                 return render_template("auth/forgot.html", error="Success change")
         else: 
@@ -72,7 +74,8 @@ def register():
                 data_base = db.DB()
                 data_base.getUser(user)
                 boolean = data_base.addUserMongoDB(username, email, password, id , gender)
-                app.cache.cache.set('database', json.dumps(data_base._user))
+                model = dbModel(data_base._user)
+                app.cache.cache.set('database', json.dumps(model.__dict__()))
                 if boolean == True:
                     return render_template("auth/register.html", error = "Success")
                 else:   

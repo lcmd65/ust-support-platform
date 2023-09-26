@@ -25,15 +25,15 @@ class DB:
         self._user = user
         
     def parsingUser(self):
-        self.userParsing()
+        self.userParsing(self._user.username, self._user.password)
         self.parsingIDRequest()
         self.connectIDImage()
 
-    
     def parsingIDRequest(self):
         data = self.connectUserRequest()
         for item in data:
             if item["id"] == str(self._user.id):
+                item['_id'] = str(item['_id'])
                 self._user.requests.append(item)
     
     def connectIDImage(self):
