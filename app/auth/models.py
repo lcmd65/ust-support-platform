@@ -1,13 +1,10 @@
-from PIL import Image
 import base64
 import io
-
-class Request():
-    def __init__(self):
-        self.request = None
-        self.respone = None
-        self.status = None
-
+from flask_caching import Cache
+from PIL import Image
+import app.cache
+import json
+        
 class User():
     def __init__(self, username, password, email, ID, gender):
         self.username = username
@@ -18,30 +15,17 @@ class User():
         self.image = None
         self.role = None
         self.requests = []
-        
-        self.parsingIDRequest()
-        self.connectIDImage()
     
-    def parsingIDRequest(self):
-        from app import db
-        data = db.connectUserRequest()
-        for item in data:
-            if item["id"] == str(self.id):
-                self.requests.append(item)
-    
-    def connectIDImage(self):
-        from app import db
-        self.image = db.connectUserImage(self.id)
-    
-    def parsingIDImage(self):
-        try:
-            self.image =  Image.open(io.BytesIO(base64.b64decode(self.image)))
-        except Exception as e:
-            print(e)
-    
-    def updateRequest(self):
-        self.requests.clear()
-        self.parsingIDRequest()
+    def initFormUser(self, user):
+        self.username = user.username
+        self.password = user.password
+        self.email = user.email
+        self.id = user.id
+        self.gender = user.gender
+        self.image = user.image
+        self.role = user.role
+        self.requests = user.requests
+
         
 
     

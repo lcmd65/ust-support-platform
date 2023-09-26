@@ -12,19 +12,25 @@ from app.auth.models import User
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from app.auth.controllers import controlAuth
+from flask_caching import Cache
+import app.cache
+import json
+
 auth_blueprint = Blueprint('auth_blueprint', __name__)
 
 @auth_blueprint.route("/login",  methods = ['GET', 'POST'])
 def login():
     error = None
     if request.method == "POST":
-        link = g.application._uri
-        g.application._client = MongoClient(link, server_api=ServerApi('1'))
         username = request.values['user'] 
         password = request.values['pass']
-        bool = db.userAuthentication(username, password)
+        user = User(username, password, None, None, None)
+        data_base = db.DB()
+        data_base.getUser(User)
+        bool = data_base.userAuthentication(username, password)
         if bool == True:
-            controlAuth(username, password)
+            data_base.parsingUser()
+            app.cache.cache.set('database', json.dumps(data_base._user))
             return redirect("/home")
         else: 
             return render_template("auth/login.html", error="Invalid username or password.")
@@ -39,7 +45,11 @@ def forgotPassword():
         new_pass = request.values['new_password']
         confirm_pass = request.values['confirm_new_password']
         if new_pass == confirm_pass:
-            boolean = db.userAuthenticationChange(username,email, new_pass)
+            user = json.loads(app.cache.cache.get('database'))
+            data_base = db.DB()
+            data_base.getUser(user)
+            boolean = data_base.userAuthenticationChange(username, email, new_pass)
+            app.cache.cache.set('database', json.dumps(data_base._user))
             if boolean == True:
                 return render_template("auth/forgot.html", error="Success change")
         else: 
@@ -51,7 +61,6 @@ def forgotPassword():
 def register():
     try:
         if request.method == "POST":
-            g.application._client = MongoClient(g.application._client._uri, server_api=ServerApi('1'))
             username = request.values['user'] 
             password = request.values['pass']
             confirm_password = request.values['confirm_password']
@@ -59,7 +68,11 @@ def register():
             id = request.values['id']
             gender = request.values['gender']
             if confirm_password == password:
-                boolean = db.addUserMongoDB(username, email, password, id , gender)
+                user = json.loads(app.cache.cache.get('database'))
+                data_base = db.DB()
+                data_base.getUser(user)
+                boolean = data_base.addUserMongoDB(username, email, password, id , gender)
+                app.cache.cache.set('database', json.dumps(data_base._user))
                 if boolean == True:
                     return render_template("auth/register.html", error = "Success")
                 else:   
