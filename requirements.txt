@@ -31,3 +31,5 @@ urllib3
 Werkzeug
 pandas
 flask-sqlalchemy
+flask_caching
+json
