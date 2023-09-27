@@ -123,8 +123,7 @@ class Conver():
         messages.append({"role": "user", "content": self.user_[index]})
         session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
             messages = messages,\
-            temperature=0.1,\
-            max_tokens = 512)
+            temperature=0.1)
         # return
         self.bot_[index] = session['choices'][0]['message']['content']
 

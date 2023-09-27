@@ -8,6 +8,7 @@ from flask import (
     g)
 import app.cache
 import json
+import openai
 from app import db
 from app.auth.models import User, dbModel
 
@@ -65,10 +66,11 @@ def homeChatbox():
             item_request = None,\
             item_new = None)
     
-@home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
-def homeChatbot():
+@home_blueprint.route("/api", methods = ['POST'])
+def api():
     from app.api.openai import api
-    openai = api()
+    key = api()
+    openai.api_key = key
     message = request.json.get("message")
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -77,9 +79,12 @@ def homeChatbot():
         ]
     )
     if completion.choices[0].message!=None:
-        return completion.choices[0].message
+        return completion.choices[0].messages
     else :
         return 'Failed to Generate response!'
+
+@home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
+def homeChatbot():
     return render_template("blog/chatbot.html")
 
 @home_blueprint.route("/speechtotext", methods = ['GET', 'POST'])

@@ -11,30 +11,109 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href = "{{ url_for('static',filename='style/chatbot.css') }}"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <header>
-
-            <div class = "container">
-                <div>
-                </div>
-
-            </div>
-        </header>
-
-        <div class = "container-conversation">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/lib/languages/python.min.js"></script>
     
-        <div>
-        <div class = "container-input">
-            <input class = "input-chatbot-entry" type = "input" name = "input" value ="input" dataplaceholder = "enter hear"></input>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 style="color:white">Chat Bot</h1>
+            <div class="chat-box mt-3">
+            </div>
+            <div class="form-group mt-3">
+                <textarea class="form-control" rows="3" placeholder="Type your message here" id="message-input"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="send-btn">Send</button>
         </div>
         <div class = "fixed-box">
             <div class = "label-policy">Privacy @2023</div>
         </div>
-        <script src="" async defer></script>
+        <script>
+             setInterval(highlightAll,1000);
+        // Function to highlight code using highlight.js library
+            function highlightAll() {
+                document.querySelectorAll("pre code").forEach(block => {
+                    hljs.highlightBlock(block);
+                });
+            }
+            const chatBox = document.querySelector(".chat-box");
+            const messageInput = document.querySelector("#message-input");
+            const sendBtn = document.querySelector("#send-btn");
+    
+            function addMessage(message, isUserMessage) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("mt-3", "p-3", "rounded");
+    
+            if (isUserMessage) {
+                messageDiv.classList.add("user-message");
+    
+            } else {
+                messageDiv.classList.add("bot-message");
+            }
+    
+            messageDiv.innerHTML = `
+                <img src="" class="user-icon"><p>${message}</p>
+                `;
+    
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            }
+    
+            function sendMessage() {
+            const message = messageInput.value.trim();
+    
+            if (message !== "") {
+                addMessage(message, true);
+    
+                fetch("/api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                            messageInput.value = "";
+                    const messageDiv = document.createElement("div");
+                    messageDiv.classList.add("mt-3", "p-3", "rounded");
+                    messageDiv.classList.add("bot-message");
+                
+                    const content = data.content;
+                    
+                    // Check if the content has code block
+                    const hasCodeBlock = content.includes("```");
+                    if (hasCodeBlock) {
+                    // If the content has code block, wrap it in a <pre><code> element
+                    const codeContent = content.replace(/```([\s\S]+?)```/g, '</p><pre><code>$1</code></pre><p>');
+    
+                    
+                    messageDiv.innerHTML = `<img src="" class="bot-icon"><p>${codeContent}</p>`
+                    
+                    }
+                    else{
+                    messageDiv.innerHTML = `<img src="" class="bot-icon"><p>${content}</p>`
+                    }
+                    chatBox.appendChild(messageDiv);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+    
+                })
+                .catch(error => console.error(error));
+            }
+            }
+    
+            sendBtn.addEventListener("click", sendMessage);
+            messageInput.addEventListener("keydown", event => {
+            if (event.keyCode === 13 && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+            });
+        </script>
     </body>
 </html>
