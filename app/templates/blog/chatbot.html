@@ -21,14 +21,37 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>    </head>
     <body>
-        <div class="container mt-5">
-            <h1 style="color:white">Chat Bot</h1>
+        <header>
+            <div class="container">
+                <nav class="navbar navbar-expand-lg main-nav px-0">
+                    <div class="collapse navbar-collapse" id="mainMenu">
+                        <ul class="navbar-nav ml-auto text-uppercase f1">
+                            <li><a href="#">User Information</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Exit</a></li>
+                        </ul>
+                        <div class="container-user-info">
+                            <div class="container-user-image">
+                                {% if user_image %}
+                                <img src="{{ user_image }}">
+                                {% endif %}
+                            </div>
+                            <div class="container-username">
+                                <p class="container-username-text" type="text" value="{{ user_name }}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="chat-container mt-5">
             <div class="chat-box mt-3">
             </div>
             <div class="form-group mt-3">
-                <textarea class="form-control" rows="3" placeholder="Type your message here" id="message-input"></textarea>
+                <textarea class="form-control" rows="1" placeholder="Nhập yêu cầu/câu hỏi" id="message-input"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" id="send-btn">Send</button>
+            <button type="button" class="btn" id="send-btn">Send</button>
         </div>
         <div class = "fixed-box">
             <div class = "label-policy">Privacy @2023</div>
