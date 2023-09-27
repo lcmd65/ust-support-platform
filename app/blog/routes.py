@@ -67,6 +67,7 @@ def homeChatbox():
     
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():
+    
     return render_template("blog/chatbot.html")
 
 @home_blueprint.route("/speechtotext", methods = ['GET', 'POST'])
