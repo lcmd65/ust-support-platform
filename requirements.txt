@@ -32,4 +32,3 @@ Werkzeug
 pandas
 flask-sqlalchemy
 flask-caching
-json
