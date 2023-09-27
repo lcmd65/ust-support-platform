@@ -1,0 +1,18 @@
+.fixed-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    height: 30px;
+    background-color: #ececec;
+}
+
+.label-policy {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: left;
+    position: relative;
+    font-size: small;
+}

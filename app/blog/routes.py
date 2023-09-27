@@ -67,7 +67,19 @@ def homeChatbox():
     
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():
-    
+    from app.api.openai import api
+    openai = api()
+    message = request.json.get("message")
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": message}
+        ]
+    )
+    if completion.choices[0].message!=None:
+        return completion.choices[0].message
+    else :
+        return 'Failed to Generate response!'
     return render_template("blog/chatbot.html")
 
 @home_blueprint.route("/speechtotext", methods = ['GET', 'POST'])
