@@ -260,6 +260,7 @@ textarea {
     font-size: 15px;
     border-width: 1px;
     border-color: #000;
+    border-radius: 10px;
 }
 
 .bot-message {
@@ -268,6 +269,7 @@ textarea {
     font-size: 15px;
     border-width: 1px;
     border-color: #000;
+    border-radius: 10px;
 }
 
 .message-text pre code {
