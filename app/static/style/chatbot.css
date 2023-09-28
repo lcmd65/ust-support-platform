@@ -15,7 +15,7 @@ header {
 }
 
 #mainMenu li>a {
-    font-size: 12px;
+    font-size: 16px;
     letter-spacing: 1px;
     color: #fff;
     font-weight: 400;
@@ -251,40 +251,44 @@ textarea {
     margin-left: 5px;
     border-radius: 10px;
     box-shadow: 0 0 5px #f1f1f1;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .user-message {
-    background-color: #fff;
+    background-color: #fafbff;
     color: #000000;
-    font-size: 12px;
+    font-size: 15px;
+    border-width: 1px;
+    border-color: #000;
 }
 
 .bot-message {
-    background-color: #fff;
+    background-color: #fafbff;
     color: rgb(0, 0, 0);
-    font-size: 12px;
+    font-size: 15px;
+    border-width: 1px;
+    border-color: #000;
 }
 
 .message-text pre code {
-    font-size: 12x;
+    font-size: 16x;
     white-space: pre-wrap;
 }
 
 .user-icon {
-    font-size: 10px;
+    font-size: 20px;
     margin-right: 5px;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
 }
 
 .bot-icon {
-    font-size: 10px;
+    font-size: 20px;
     margin-right: 5px;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 25px;
+    height: 25px;
 }
 
 .form-control-user {
@@ -296,7 +300,7 @@ textarea {
     border: 1px;
     border-color: #000;
     box-shadow: 0 0 3px #545252;
-    font-size: 12;
+    font-size: 16;
 }
 
 .form-group-user {

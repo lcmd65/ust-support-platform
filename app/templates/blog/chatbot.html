@@ -74,7 +74,6 @@
             const chatBox = document.querySelector(".chat-box");
             const messageInput = document.querySelector("#message-input");
             const sendBtn = document.querySelector("#send-btn");
-            
             function addMessage(message, isUserMessage) {
                 const messageDiv = document.createElement("div");
                 messageDiv.classList.add("mt-3", "p-3", "rounded");
@@ -89,7 +88,7 @@
                     messageDiv.classList.add("bot-message");
                 }
             
-                messageDiv.innerHTML = `<img src="" class="user-icon"><p>${message}</p>`;
+                messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-user.png') }}" class="user-icon"><p>${message}</p>`;
                 treeItem.innerHTML = `<imge src=""><p class="tree-item-click">${message}</p>`;
             
                 chatBox.appendChild(messageDiv);
@@ -122,9 +121,9 @@
                             if (hasCodeBlock) {
                                 // If the content has code block, wrap it in a <pre><code> element
                                 const codeContent = content.replace(/```([\s\S]+?)```/g, '</p><pre><code>$1</code></pre><p>');
-                                messageDiv.innerHTML = `<img src="" class="bot-icon"><p>${codeContent}</p>`
+                                messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-bot.png') }}" class="bot-icon"><p>${codeContent}</p>`
                             } else {
-                                messageDiv.innerHTML = `<img src="" class="bot-icon"><p>${content}</p>`
+                                messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-bot.png') }}" class="bot-icon"><p>${content}</p>`
                             }
                             chatBox.appendChild(messageDiv);
                             chatBox.scrollTop = chatBox.scrollHeight;
