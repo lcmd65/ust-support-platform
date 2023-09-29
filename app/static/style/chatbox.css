@@ -74,7 +74,7 @@ body {
 
 .main-header {
     position: fixed;
-    top: 25px;
+    top: 0px;
     left: 0;
     z-index: 99;
     width: 100%;

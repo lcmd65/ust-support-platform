@@ -8,9 +8,9 @@ def api():
     db = client["Api"]
     collection = db["api"]
     documents = collection.find()
+    api_key = None
     for item in documents:
         if item['api'] == 'nohcel-service':
-            data = item['api-key']
+            api_key = item['api-key']
             break
-    api_key = data
     return api_key

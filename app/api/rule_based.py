@@ -108,7 +108,7 @@ class Conver():
             return self.bot_[index]
             
     def sementicWord2Vec(self):
-        model = 'app/data/vnex.model.bin'
+        model = 'app/api/vnex.model.bin'
         if os.path.isfile(model):
             from packaging import version
             if version.parse(gensim.__version__) >= version.parse("1.0.1"):

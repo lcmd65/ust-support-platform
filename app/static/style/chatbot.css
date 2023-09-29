@@ -15,7 +15,7 @@ header {
 }
 
 #mainMenu li>a {
-    font-size: 16px;
+    font-size: 12px;
     letter-spacing: 1px;
     color: #fff;
     font-weight: 400;
@@ -68,7 +68,7 @@ header {
 
 .main-header {
     position: fixed;
-    top: 25px;
+    top: 0px;
     left: 0;
     z-index: 99;
     width: 100%;
@@ -78,7 +78,7 @@ header {
 
 .main-header.fixed-nav {
     top: 0;
-    background: #374b9d;
+    background: #fff;
     -webkit-box-shadow: 0 8px 12px -8px rgba(0, 0, 0, 0.09);
     box-shadow: 0 8px 12px -8px rgba(0, 0, 0, 0.09);
     -webkit-transition: all 0.4s ease;
@@ -193,6 +193,10 @@ header {
     text-align: left;
 }
 
+.container {
+    font-size: 15px;
+}
+
 .chat-box {
     height: 72vh;
     overflow: auto;
@@ -220,13 +224,13 @@ textarea {
     margin-top: 50px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px #bebebe;
+    box-shadow: 0 0 1px #000000;
     position: fixed;
 }
 
 .tree-container {
     background-color: #ffffff;
-    box-shadow: 0 0 10px #bebebe;
+    box-shadow: 0 0 1px #000000;
     font-size: 14px;
     margin-left: 2%;
     margin-right: 5%;
@@ -237,10 +241,10 @@ textarea {
     min-height: 80%;
     max-height: 90%;
     position: fixed;
+    overflow: auto;
 }
 
 .tree-view {
-    overflow: auto;
     max-height: 100%;
     min-height: 100%;
 }
@@ -334,4 +338,22 @@ textarea {
 
 .btn {
     display: none !important;
+}
+
+ul {
+    list-style-image: url('images/icons-message.png');
+    margin-left: 50px;
+    margin-top: 0;
+    margin-right: 5%;
+    overflow: auto;
+    width: 90%;
+    float: left;
+    position: absolute;
+}
+
+li {
+    overflow: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-height: 860px;
 }
