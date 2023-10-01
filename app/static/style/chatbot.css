@@ -249,6 +249,14 @@ textarea {
     min-height: 100%;
 }
 
+.tree-item::placeholder {
+    background-color: #2d2d7f;
+}
+
+.tree-item::selection {
+    background-color: #2d2d7f;
+}
+
 .chat-message {
     padding: 5px;
     margin-bottom: 0px;

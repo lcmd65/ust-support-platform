@@ -68,23 +68,20 @@ def homeChatbox():
     
 @home_blueprint.route("/api", methods = ['POST'])
 def api():
-    from app.api.openai import api
+    from app.api.openai import api_getting
+    openai.api_key = api_getting()
+    message = request.json.get("message")
     try:
-        key = api()
-        openai.api_key = key
-        message = request.json.get("message")
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "user", "content": message}
             ]
         )
-        if completion.choices[0].message!=None:
-            return completion.choices[0].messages
-        else :
-            return 'Failed to Generate response!'
-    except:
-        return 'Failed to Generate response!'
+        return completion['choices'][0]['message']['content']
+    except Exception as e:
+        # Handle the exception gracefully
+        return f"Failed to generate response: {e}"
 
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():

@@ -14,6 +14,19 @@ function addMessage(message, isUserMessage) {
     const messageDiv = document.createElement("div");
     messageDiv.classList.add("mt-3", "p-3", "rounded");
     const treeItem = document.createElement("li");
+    treeItem.addEventListener("click", function viewItem(event) {
+        // Get the clicked `li` tag.
+        const li = event.target;
+        const item_view = li.getElementsByTagName('p')[0].innerHTML;
+        const chatBoxElements = document.getElementById(".chat-box");
+        for (const chatBoxElement of chatBoxElements) {
+            const pElement = chatBoxElement.querySelector('p');
+            if (pElement.textContent === item_view) {
+                chatBoxElement.scrollIntoView(true);
+                chatBoxElement.scrollIntoView({ smooth: true });
+            }
+        }
+    });
     const messageInput = document.querySelector("tree-view");
 
     if (isUserMessage) {
@@ -62,7 +75,6 @@ function sendMessage() {
                 }
                 chatBox.appendChild(messageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
-
             })
             .catch(error => console.error(error));
     }
@@ -74,18 +86,3 @@ messageInput.addEventListener("keydown", event => {
         sendMessage();
     }
 });
-
-function viewItem(event) {
-    // Get the clicked `li` tag.
-    const li = event.target;
-    const item_view = li.getElementsByTagName('p')[0].innerHTML;
-    const chatBoxElements = document.getElementById(".chat-box");
-    for (const chatBoxElement of chatBoxElements) {
-        const pElement = chatBoxElement.querySelector('p');
-        if (pElement.textContent === item_view) {
-            chatBoxElement.scrollIntoView(true);
-            chatBoxElement.scrollIntoView({ smooth: true });
-        }
-    }
-}
-treeItem.addEventListener("click", viewItem);
