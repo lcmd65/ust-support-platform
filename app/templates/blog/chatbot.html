@@ -87,10 +87,8 @@
                     const li = event.target;
                     // Get the item view text.
                     const item_view = li.getElementsByTagName('p')[0].innerHTML;
-                
                     // Get the first chat box element.
                     const chatBoxElement = document.querySelector(".chat-box");
-                
                     // Scroll the chat box element into view if its inner text matches the item view text.
                     if (chatBoxElement.querySelector('p').textContent === item_view) {
                         chatBoxElement.scrollIntoView(true);
@@ -124,42 +122,56 @@
                     // Send the message to the bot
                     try {
                         const response = await fetch("/api", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify({ message })
-                            }
-                        );
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({ message }),
+                        });
+                      
                         // Get the bot's response
                         const data = await response.json();
+                      
                         // Escape any HTML entities in the bot's response
-                        const escapedContent = data.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+                        try{
+                            const escapedContent = data.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+                            const data = escapedContent
+                        } catch(error) {
+                            console.error(error);
+                        }
+                      
                         // Remove the loading indicator
                         const loadingIndicator = document.querySelector(".loading");
                         loadingIndicator.remove();
+                      
                         // Add the bot's response to the chat box
                         const messageDiv = document.createElement("div");
                         messageDiv.classList.add("mt-3", "p-3", "rounded");
                         messageDiv.classList.add("bot-message");
-                        messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-bot.png') }}" class="bot-icon"><p>${escapedContent}</p>`;
+                        messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-bot.png') }}" class="bot-icon"><p>${data}</p>`;
                         chatBox.appendChild(messageDiv);
+                      
                         // Scroll the chat box to the bottom
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } catch (error) {
-                        // Handle the error gracefully
-                        console.error(error);
+                        // Log the error
+                        console.error("Failed to fetch bot response:", error);
+                      
+                        // Show a more specific error message to the user
                         const errorMessageDiv = document.createElement("div");
                         errorMessageDiv.classList.add("mt-3", "p-3", "rounded");
                         errorMessageDiv.classList.add("error-message");
-                        errorMessageDiv.innerHTML = `<p>Oops, something went wrong. Please try again later.</p>`;
-                        console.log(error);
+                        errorMessageDiv.innerHTML = `<p>Oops, something went wrong while fetching the bot response: ${error.message}</p>`;
                         chatBox.appendChild(errorMessageDiv);
+                      
+                        // Remove the loading indicator even if there is an error
+                        const loadingIndicator = document.querySelector(".loading");
+                        loadingIndicator.remove();
                     }
                     // Clear the message input
                     messageInput.value = "";
                 }
-            }              
+            }
             sendBtn.addEventListener("click", sendMessage);
             messageInput.addEventListener("keydown", event => {
                 if (event.keyCode === 13 && !event.shiftKey) {

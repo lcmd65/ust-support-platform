@@ -1,10 +1,16 @@
-/**
- * index.scss
- * - Add any styles you want here!
- */
-
 body {
+    background: #ffffff;
+}
+
+header {
     background: #2d2d7f !important;
+}
+
+.navbar-userinfo {
+    background: #ffffff!important;
+    color: #000000;
+    margin-top: 50px;
+    margin-left: 5%;
 }
 
 
@@ -69,7 +75,7 @@ body {
 
 .main-header {
     position: fixed;
-    top: 25px;
+    top: 0px;
     left: 0;
     z-index: 99;
     width: 100%;
@@ -194,6 +200,11 @@ body {
     text-align: left;
 }
 
+.nohcel-home {
+    position: fixed;
+    margin-top: 125px;
+}
+
 .container-list-home-function {
     border-radius: 8px;
     align-self: center;
@@ -214,7 +225,7 @@ body {
 
 .container-username {
     font-size: small;
-    color: #ffffff;
+    color: #000000;
 }
 
 .fixed-box {
