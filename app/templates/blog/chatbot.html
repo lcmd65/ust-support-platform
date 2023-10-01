@@ -46,6 +46,7 @@
                 </nav>
             </div>
         </header>
+        <p class = "tree-name">session</p>
         <div class="chatbot-workspace-container">
             <div class ="tree-container">
                 <ul class = "tree-view">
@@ -104,7 +105,7 @@
                     messageDiv.classList.add("bot-message");
                 }
                 messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-user.png') }}" class="user-icon"><p>${message}</p>`;
-                treeItem.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-message.png') }}" class ="icons-message"><p class="tree-item-click">${message}</p>`;            
+                treeItem.innerHTML = `<li class="tree-item-click"><img src="{{ url_for('static',filename='style/images/icons-message.png') }}" class ="icons-message">${message}</li>`;            
                 chatBox.appendChild(messageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
                 treeview.appendChild(treeItem)

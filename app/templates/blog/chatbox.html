@@ -39,13 +39,13 @@
                 <div class="container-nohcel-chatbox-tree">
                     <div class="container-nohcel-chatbox-tree-name">
                         <p class="treename" type="text">
-                            requests list
+                            requests workspace
                         </p>
                     </div>
                     <form method="post" action="/chatbox">
                         <ul id="compositions-list" class="pure-tree">
                             {% for item in tree_request %}
-                                <li>
+                                <li class = "tree-li">
                                     <button type="submit" class="pure-tree-link" value="{{ item['_id'] }}" name="option">{{item['subject']}}</button>
                                 </li>
                             {% endfor %}
@@ -56,7 +56,7 @@
                     <div class="container-nohcel-chatbox-action">
                         <form action="/chatbox" method="post">
                             <div class = "parent">
-                                <button class="init-request-button" name="button" value="init">tạo câu hỏi mới</button>
+                                <button class="init-request-button" name="button" value="init">Tạo câu hỏi mới</button>
                             </div>
                         </form>
                     </div>

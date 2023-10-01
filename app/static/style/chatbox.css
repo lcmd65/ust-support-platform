@@ -217,7 +217,6 @@ body {
 
 .container-nohcel-chatbox-workspace {
     flex-direction: column;
-    display: flex;
     height: 90vh;
 }
 
@@ -226,40 +225,46 @@ body {
     background: #ffffff;
     border: 0px;
     margin-top: 5px;
-    height: 15px;
+    height: 10px;
     color: #000000;
+    flex-direction: column-reverse;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .treename {
-    font-size: medium;
+    font-size: 13px;
+    font-weight: 300;
 }
 
 .container-nohcel-chatbox-tree {
     background-color: #ffffff;
     box-shadow: 0 0 1px #000000;
-    font-size: 14px;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-top: 50px;
-    border-radius: 8px;
+    font-size: 12px;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 40px;
+    border-radius: 0px;
     min-width: 20%;
     max-width: 23%;
-    min-height: 90%;
+    min-height: 95%;
     max-height: 100%;
     position: fixed;
 }
 
 .pure-tree {
     background-color: #ffffff;
-    width: 100%;
+    width: 95%;
     height: 90%;
+    margin-right: 5%;
     position: absolute;
     overflow: auto;
 }
 
 .container-nohcel-chatbox-tree-name {
     text-align: center;
-    font-size: larger;
+    font-size: 12px;
     background-color: #606060;
     color: #ffffff;
 }
@@ -267,11 +272,11 @@ body {
 .container-nohcel-chatbox-view {
     background-color: #ffffff;
     font-size: medium;
-    margin-left: 22%;
-    margin-top: 50px;
+    margin-left: 21%;
+    margin-top: 40px;
     border-radius: 8px;
-    width: 77%;
-    height: 90%;
+    width: 78%;
+    height: 87%;
     margin-right: 0%;
     position: fixed;
     border: 1px;
@@ -345,7 +350,7 @@ body {
 }
 
 .text-session {
-    font-size: medium;
+    font-size: 12px;
     font-weight: 500;
     text-decoration: underline;
     margin-left: 2%;
@@ -381,7 +386,7 @@ body {
 }
 
 .init-request-button {
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 0px;
     text-decoration: underline;
     color: #2d2d7f;
@@ -390,7 +395,7 @@ body {
 }
 
 .init-request-button-click {
-    font-size: 14px;
+    font-size: 12px;
     text-decoration: underline;
     color: #2d2d7f;
     background: none;
@@ -406,5 +411,21 @@ body {
     border: 1px;
     border-color: #000;
     box-shadow: 0 0 3px #545252;
-    font-size: 16;
+    font-size: 12px;
+}
+
+ul {
+    list-style-type: "→";
+    list-style-position: outside;
+}
+
+.tree-li {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tree-li:hover {
+    overflow: visible;
 }
