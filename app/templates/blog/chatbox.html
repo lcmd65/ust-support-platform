@@ -39,28 +39,33 @@
                 <div class="container-nohcel-chatbox-tree">
                     <div class="container-nohcel-chatbox-tree-name">
                         <p class="treename" type="text">
-                            Requests
+                            requests list
                         </p>
                     </div>
                     <form method="post" action="/chatbox">
-                        <ul id="compositions-list" class="pure-tree main-tree">
+                        <ul id="compositions-list" class="pure-tree">
                             {% for item in tree_request %}
-                                <input type="submit" class="pure-tree_link" value="{{ item['_id'] }}" name="option">
+                                <li>
+                                    <button type="submit" class="pure-tree-link" value="{{ item['_id'] }}" name="option">{{item['subject']}}</button>
+                                </li>
                             {% endfor %}
                         </ul>
                     </form>
                 </div>
                 <div class="container-nohcel-chatbox-view">
-                    <div class="request-item-vew">
+                    <div class="request-item-view">
                         {% if item_request %}
+                            <p class = "text-session">Subject: </p>
                             <div class="item-subject">
-                                {{ item_request['subject'] }}
+                                <p class = "text-session-item">  {{ item_request['subject'] }}  </p>
                             </div>
+                            <p class = "text-session">Question: </p>
                             <div class="item-question">
-                                {{ item_request['question'] }}
+                                <p class = "text-session-item">  {{ item_request['request'] }}  </p>
                             </div>
+                            <p class = "text-session">Respone: </p>
                             <div class="item-respone">
-                                {{ item_request['respone'] }}
+                                <p class = "text-session-item">  {{ item_request['respone'] }}  </p>
                             </div>
                         {% endif %}
 
@@ -79,7 +84,7 @@
                 </div>
                 <div class="container-nohcel-chatbox-action">
                     <form action="/chatbox" method="post">
-                        <button type="submit" class="btn btn-primary" name="button" value="init">Tạo request mới</button>
+                        <button type="submit" class="btn-init-request" name="button" value="init">Tạo request mới</button>
                     </form>
                 </div>
             </div>
@@ -87,6 +92,10 @@
         <div class="fixed-box">
             <div class="label-policy">Privacy @2023</div>
         </div>
-        <script src="" async defer></script>
+        <script src="" async defer>
+            function clickItemTree{
+                
+            }
+        </script>
     </body>
 </html>

@@ -153,7 +153,12 @@ class Conver():
             self.openAIAPIprocessing(self.length -1)
             return self.bot_[self.length - 1]
             
-
-
-        
-    
+class Conversation():
+    def __init__(self, input):
+        self.bot_, self.user_, self.score = [], [], []
+        self.length = 0
+        self.output = [] # topscore list 
+        self.model = self.sementicWord2Vec()
+        self.llm_model = AutoModelForQuestionAnswering.from_pretrained("ancs21/xlm-roberta-large-vi-qa")
+        self.tokenizer = AutoTokenizer.from_pretrained("ancs21/xlm-roberta-large-vi-qa", use_fast=False)
+        self.pipeline = pipeline("question-answering", model=self.llm_model, tokenizer=self.tokenizer)
