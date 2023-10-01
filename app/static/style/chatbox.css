@@ -267,10 +267,10 @@ body {
 .container-nohcel-chatbox-view {
     background-color: #ffffff;
     font-size: medium;
-    margin-left: 23%;
+    margin-left: 22%;
     margin-top: 50px;
     border-radius: 8px;
-    width: 73%;
+    width: 77%;
     height: 90%;
     margin-right: 0%;
     position: fixed;
@@ -279,16 +279,33 @@ body {
     border-radius: 8px;
 }
 
+.container-nohcel-chatbox-action {
+    margin-top: 0%;
+    margin-right: 5px;
+    position: relative;
+    text-align: right;
+}
+
 .request-item-view {
     height: 100%;
     width: 100%;
     position: absolute;
     border: 1px;
-    border: 1px;
     border-color: #000;
     border-radius: 8px;
     box-shadow: 0 0 1px #000000;
     position: absolute;
+}
+
+.item-clicked-button {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5px;
+    position: relative;
+    border: 1px;
+    border-color: #000;
+    border-radius: 8px;
 }
 
 .item-subject {
@@ -357,4 +374,37 @@ body {
     text-align: left;
     position: relative;
     font-size: small;
+}
+
+.parent {
+    margin-right: 0px;
+}
+
+.init-request-button {
+    font-size: 14px;
+    margin-right: 0px;
+    text-decoration: underline;
+    color: #2d2d7f;
+    background: none;
+    border: 0px;
+}
+
+.init-request-button-click {
+    font-size: 14px;
+    text-decoration: underline;
+    color: #2d2d7f;
+    background: none;
+    border: 0px;
+}
+
+.form-entry-request {
+    height: 42px;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px;
+    border-color: #000;
+    box-shadow: 0 0 3px #545252;
+    font-size: 16;
 }
