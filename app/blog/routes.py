@@ -4,6 +4,7 @@ from flask import (
     request,
     render_template,
     redirect,
+    jsonify,
     url_for,
     g)
 import app.cache
@@ -70,7 +71,7 @@ def homeChatbox():
 def api():
     from app.api.openai import api_getting
     openai.api_key = api_getting()
-    message = request.json.get("message")
+    message = request.json.get('message')
     try:
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -78,10 +79,10 @@ def api():
                 {"role": "user", "content": message}
             ]
         )
-        return completion['choices'][0]['message']['content']
+        return jsonify(completion['choices'][0]['message']['content'])
     except Exception as e:
         # Handle the exception gracefully
-        return f"Failed to generate response: {e}"
+        return jsonify(f"Failed to generate response: {e}")
 
 @home_blueprint.route("/chatbot", methods = ['GET', 'POST'])
 def homeChatbot():

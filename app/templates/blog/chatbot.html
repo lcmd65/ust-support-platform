@@ -85,14 +85,16 @@
                 treeItem.addEventListener("click", function viewItem(event) {
                     // Get the clicked `li` tag.
                     const li = event.target;
+                    // Get the item view text.
                     const item_view = li.getElementsByTagName('p')[0].innerHTML;
-                    const chatBoxElements = document.getElementById(".chat-box");
-                    for (const chatBoxElement of chatBoxElements) {
-                        const pElement = chatBoxElement.querySelector('p');
-                        if (pElement.textContent === item_view) {
-                            chatBoxElement.scrollIntoView(true);
-                            chatBoxElement.scrollIntoView({ smooth: true });
-                        }
+                
+                    // Get the first chat box element.
+                    const chatBoxElement = document.querySelector(".chat-box");
+                
+                    // Scroll the chat box element into view if its inner text matches the item view text.
+                    if (chatBoxElement.querySelector('p').textContent === item_view) {
+                        chatBoxElement.scrollIntoView(true);
+                        chatBoxElement.scrollIntoView({ smooth: true });
                     }
                 });
                 const messageInput = document.querySelector("tree-view");
@@ -104,8 +106,7 @@
                     messageDiv.classList.add("bot-message");
                 }
                 messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-user.png') }}" class="user-icon"><p>${message}</p>`;
-                treeItem.innerHTML = `<imge src="{{ url_for('static',filename='style/images/icons-message.png') }}"><p class="tree-item-click">${message}</p>`;
-            
+                treeItem.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-message.png') }}" class ="icons-message"><p class="tree-item-click">${message}</p>`;            
                 chatBox.appendChild(messageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
                 treeview.appendChild(treeItem)
@@ -118,37 +119,31 @@
                     const loadingIndicator = document.createElement("div");
                     loadingIndicator.classList.add("loading");
                     chatBox.appendChild(loadingIndicator);
-                
                     // Add the user's message to the chat box
                     addMessage(message, true);
-                
                     // Send the message to the bot
                     try {
                         const response = await fetch("/api", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ message })
-                        });
-                
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({ message })
+                            }
+                        );
                         // Get the bot's response
                         const data = await response.json();
-                
                         // Escape any HTML entities in the bot's response
                         const escapedContent = data.content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-                
                         // Remove the loading indicator
                         const loadingIndicator = document.querySelector(".loading");
                         loadingIndicator.remove();
-                
                         // Add the bot's response to the chat box
                         const messageDiv = document.createElement("div");
                         messageDiv.classList.add("mt-3", "p-3", "rounded");
                         messageDiv.classList.add("bot-message");
                         messageDiv.innerHTML = `<img src="{{ url_for('static',filename='style/images/icons-bot.png') }}" class="bot-icon"><p>${escapedContent}</p>`;
                         chatBox.appendChild(messageDiv);
-                
                         // Scroll the chat box to the bottom
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } catch (error) {
@@ -158,9 +153,9 @@
                         errorMessageDiv.classList.add("mt-3", "p-3", "rounded");
                         errorMessageDiv.classList.add("error-message");
                         errorMessageDiv.innerHTML = `<p>Oops, something went wrong. Please try again later.</p>`;
+                        console.log(error);
                         chatBox.appendChild(errorMessageDiv);
                     }
-                
                     // Clear the message input
                     messageInput.value = "";
                 }
