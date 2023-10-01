@@ -198,7 +198,7 @@ header {
 }
 
 .chat-box {
-    height: 72vh;
+    height: 76vh;
     overflow: auto;
     padding: 10px;
     margin-bottom: 0px;
@@ -216,8 +216,8 @@ textarea {
 .chat-container {
     max-width: 1080px;
     min-width: 73%;
-    min-height: 80%;
-    max-height: 90%;
+    min-height: 85%;
+    max-height: 95%;
     margin-right: 2%;
     margin-bottom: 10%;
     margin-left: 25%;
@@ -238,8 +238,8 @@ textarea {
     border-radius: 8px;
     min-width: 20%;
     max-width: 23%;
-    min-height: 80%;
-    max-height: 90%;
+    min-height: 85%;
+    max-height: 95%;
     position: fixed;
     overflow: auto;
 }
