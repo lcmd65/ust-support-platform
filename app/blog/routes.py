@@ -61,6 +61,10 @@ def homeChatbox():
                 tree_request = data_base._user.requests,\
                 item_request = None,\
                 item_new = button)
+            elif button =="init_request":
+                subject_text = request.values("subject-entry")
+                request_text = request.values("question-entry")
+                data_base.pushRequestToMongo(user.id, subject_text, request_text)
     return render_template("blog/chatbox.html", user_name= data_base._user.username,\
             user_image = data_base._user.image,\
             tree_request = data_base._user.requests,\
