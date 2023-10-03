@@ -70,6 +70,12 @@ def homeChatbox():
                     tree_request = data_base._user.requests,\
                     item_request = None,\
                     item_new = None)
+            elif button == "destroy":
+                return render_template("blog/chatbox.html", user_name= data_base._user.username,\
+                    user_image = data_base._user.image,\
+                    tree_request = data_base._user.requests,\
+                    item_request = None,\
+                    item_new = None)
     return render_template("blog/chatbox.html", user_name= data_base._user.username,\
             user_image = data_base._user.image,\
             tree_request = data_base._user.requests,\
