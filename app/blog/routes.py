@@ -57,14 +57,19 @@ def homeChatbox():
             button = request.form.get("button")
             if button == "init":
                 return render_template("blog/chatbox.html", user_name= data_base._user.username,\
-                user_image = data_base._user.image,\
-                tree_request = data_base._user.requests,\
-                item_request = None,\
-                item_new = button)
+                    user_image = data_base._user.image,\
+                    tree_request = data_base._user.requests,\
+                    item_request = None,\
+                    item_new = button)
             elif button =="init_request":
-                subject_text = request.values("subject-entry")
-                request_text = request.values("question-entry")
+                subject_text = request.values["subject-entry"]
+                request_text = request.values["question-entry"]
                 data_base.pushRequestToMongo(user.id, subject_text, request_text)
+                return render_template("blog/chatbox.html", user_name= data_base._user.username,\
+                    user_image = data_base._user.image,\
+                    tree_request = data_base._user.requests,\
+                    item_request = None,\
+                    item_new = None)
     return render_template("blog/chatbox.html", user_name= data_base._user.username,\
             user_image = data_base._user.image,\
             tree_request = data_base._user.requests,\
