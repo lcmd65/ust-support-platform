@@ -1,15 +1,10 @@
-/**
- * index.scss
- * - Add any styles you want here!
- */
+body {
+    background: #eaeaea !important;
+    flex-direction: column;
+}
 
 header {
     background: #2d2d7f !important;
-}
-
-body {
-    background: #ffffff !important;
-    flex-direction: column;
 }
 
 
@@ -21,7 +16,7 @@ body {
 }
 
 #mainMenu li>a {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 1px;
     color: #fff;
     font-weight: 400;
@@ -122,9 +117,9 @@ body {
         margin: 0;
         padding: 0;
         width: 40px;
-        height: 40px;
+        height: 20px;
         position: absolute;
-        top: 25px;
+        top: 10px;
         right: 0;
         border: none;
         border-radius: 0;
@@ -138,11 +133,11 @@ body {
         text-align: center;
     }
     .main-header .navbar-nav {
-        margin-top: 70px;
+        margin-top: 30px;
     }
     .main-header .navbar-nav li .nav-link {
         text-align: center;
-        padding: 20px 15px;
+        padding: 25px 15px;
         border-radius: 0px;
     }
     /**/
@@ -173,7 +168,7 @@ body {
         top: 21px;
     }
     .main-header .current .icon-bar {
-        margin-bottom: 5px;
+        margin-bottom: 0px;
         border-radius: 0;
         display: block;
     }
@@ -200,7 +195,7 @@ body {
 }
 
 .nohcel-chatbox {
-    background-color: #ffffff;
+    background-color: #eaeaea;
     height: 100vh;
     display: block;
 }
@@ -218,6 +213,7 @@ body {
 .container-nohcel-chatbox-workspace {
     flex-direction: column;
     height: 90vh;
+    background: #eaeaea;
 }
 
 .pure-tree-link {
@@ -228,7 +224,7 @@ body {
     height: 10px;
     color: #000000;
     flex-direction: column-reverse;
-    font-size: 13px;
+    font-size: 14px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -246,8 +242,8 @@ body {
     margin-right: 0%;
     margin-top: 40px;
     border-radius: 0px;
-    min-width: 20%;
-    max-width: 23%;
+    min-width: 19%;
+    max-width: 19%;
     min-height: 95%;
     max-height: 100%;
     position: fixed;
@@ -265,30 +261,34 @@ body {
 .container-nohcel-chatbox-tree-name {
     text-align: center;
     font-size: 12px;
-    background-color: #606060;
-    color: #ffffff;
+    background-color: #e5e6ef;
+    color: #05003b;
 }
 
 .container-nohcel-chatbox-view {
     background-color: #ffffff;
+    background: #ffffff;
     font-size: medium;
-    margin-left: 21%;
-    margin-top: 40px;
+    margin-left: 20%;
+    margin-top: 45px;
     border-radius: 8px;
-    width: 78%;
-    height: 87%;
+    width: 79%;
+    height: 90%;
     margin-right: 0%;
     position: fixed;
     border: 1px;
     border-color: #000;
     border-radius: 8px;
+    box-shadow: 0 0 2px #000000;
 }
 
 .container-nohcel-chatbox-action {
-    margin-top: 0%;
     margin-right: 5px;
-    position: relative;
+    position: absolute;
     text-align: right;
+    margin-left: 90%;
+    background-color: #ffffff;
+    z-index: 900;
 }
 
 .request-item-view {
@@ -307,12 +307,13 @@ body {
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5px;
-    position: relative;
+    position: absolute;
     border: 1px;
     border-color: #000;
     border-radius: 8px;
-    display: flex;
-    flex-direction: row;
+    text-align: right;
+    visibility: visible;
+    z-index: 999999 !important;
 }
 
 .item-subject {
@@ -424,7 +425,8 @@ ul {
 }
 
 .tree-li {
-    max-width: 140px;
+    margin-top: 5px;
+    max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
