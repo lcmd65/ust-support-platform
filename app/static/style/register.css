@@ -1,0 +1,13 @@
+.card-body {
+    font-size: 12px;
+    position: flex;
+    margin-left: 30%;
+    width: 40%;
+    margin-top: auto;
+}
+
+.wrap-forgot-entry {
+    text-align: left;
+    position: absolute;
+    width: 100%;
+}
