@@ -41,21 +41,24 @@ def login():
 def forgotPassword():
     error = None
     if request.method == "POST":
-        username = request.values['user'] 
-        email = request.values['email']
-        new_pass = request.values['new_password']
-        confirm_pass = request.values['confirm_new_password']
-        if new_pass == confirm_pass:
-            user = json.loads(app.cache.cache.get('database'))
-            data_base = db.DB()
-            data_base.getUser(user)
-            boolean = data_base.userAuthenticationChange(username, email, new_pass)
-            model = dbModel(data_base._user)
-            app.cache.cache.set('database', json.dumps(model.__dict__()))
-            if boolean == True:
-                return render_template("auth/forgot.html", error="Success change")
-        else: 
-            return render_template("auth/forgot.html", error="Wrong username or email")
+        if request.form.get("button") == "back":
+            return render_template("auth/login.html", error = None)
+        else:
+            username = request.values['user'] 
+            email = request.values['email']
+            new_pass = request.values['new_password']
+            confirm_pass = request.values['confirm_new_password']
+            if new_pass == confirm_pass:
+                user = json.loads(app.cache.cache.get('database'))
+                data_base = db.DB()
+                data_base.getUser(user)
+                boolean = data_base.userAuthenticationChange(username, email, new_pass)
+                model = dbModel(data_base._user)
+                app.cache.cache.set('database', json.dumps(model.__dict__()))
+                if boolean == True:
+                    return render_template("auth/forgot.html", error="Success change")
+            else: 
+                return render_template("auth/forgot.html", error="Wrong username or email")
     return render_template("auth/forgot.html", error = error)
     
 

@@ -1,20 +1,23 @@
 .body {
-    margin-top: 25%;
     background-color: #ececec;
 }
 
-.forgot-form {
-    height: 50%;
+.nav-bar {
+    margin-top: 0px;
+    height: 35px;
+    align-items: left;
+    background-color: #15256e;
+    flex-direction: column;
 }
 
-.card {
-    padding: 100px;
-    text-align: left;
-    min-width: 800px;
-    min-height: 1000px;
-    margin: auto;
-    display: table;
-    background-color: #ececec;
+.btn-nav {
+    margin-top: 10px;
+    position: relative;
+    background-color: #15256e;
+    color: #ffffff;
+    border: 0px;
+    margin-left: 20px;
+    font-size: 12px;
 }
 
 .card-body {
@@ -51,7 +54,6 @@
 
 .wrap-forgot-btn {
     text-align: right;
-    vertical-align: right;
 }
 
 .forgot-btn {
@@ -59,12 +61,17 @@
     width: 200px;
     border: 0px;
     border-radius: 8px;
-    height: 20px;
-    background-color: rgb(46, 77, 179);
-    color: white;
-    font-size: small;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    text-decoration: underline;
 }
 
 .forgot-btn:hover {
     background-color: #15256e;
+    color: #ffffff;
+}
+
+.container {
+    margin-top: 40px;
 }
