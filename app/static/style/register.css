@@ -1,13 +1,63 @@
-.card-body {
+body {
+    background: None;
+    flex-direction: row;
+}
+
+.container {
     font-size: 12px;
     position: flex;
     margin-left: 30%;
     width: 40%;
-    margin-top: auto;
+    margin-top: 20vh;
 }
 
-.wrap-forgot-entry {
-    text-align: left;
-    position: absolute;
+.card-body {
+    position: relative;
+    background-color: #ffffff !important;
+}
+
+.card-header {
+    background-color: #f0ebeb;
+}
+
+.wrap-forgot-btn {
+    text-align: right;
+    position: relative;
     width: 100%;
+}
+
+.forgot-btn {
+    text-align: center;
+    position: relative;
+    width: 150px;
+    background-color: rgba(14, 14, 107, 0.849);
+    border: 0px;
+    color: #ffffff;
+    border-radius: 8px;
+    margin-right: 5%;
+}
+
+.forgot-btn:hover {
+    background-color: #ececec;
+    color: #000000;
+    border: 1px;
+    border-color: #120d70;
+}
+
+.frame-privacy {
+    position: fixed;
+    flex-direction: row;
+    background-color: #ececec;
+    margin-bottom: 0%;
+    height: 5%;
+    margin-top: 90%;
+}
+
+.label-privacy {
+    text-align: left;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-size: 14px;
+    color: #000000;
+    position: relative;
 }
