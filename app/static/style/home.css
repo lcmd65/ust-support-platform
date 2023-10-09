@@ -4,13 +4,14 @@ body {
 
 header {
     background: #2d2d7f !important;
+    text-align: right !important;
 }
 
 .navbar-userinfo {
     background: #ffffff!important;
     color: #000000;
     margin-top: 50px;
-    margin-left: 5%;
+    margin-left: 90%;
 }
 
 
@@ -29,6 +30,7 @@ header {
     position: relative;
     z-index: 1;
     text-decoration: none;
+    text-align: right;
 }
 
 .main-header.fixed-nav #mainMenu li>a {
@@ -115,7 +117,7 @@ header {
 @media (max-width: 991px) {
     /*header starts*/
     .collapse.in {
-        display: block !important;
+        display: block;
         padding: 0;
         clear: both;
     }
@@ -139,7 +141,8 @@ header {
         text-align: center;
     }
     .main-header .navbar-nav {
-        margin-top: 70px;
+        margin-top: 50px;
+        margin-left: 60%;
     }
     .main-header .navbar-nav li .nav-link {
         text-align: center;
@@ -197,7 +200,7 @@ header {
 }
 
 .collapse .navbar-collapse {
-    text-align: left;
+    text-align: right;
 }
 
 .nohcel-home {
