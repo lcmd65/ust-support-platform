@@ -1,15 +1,11 @@
-        
-import re
-import nltk 
-import numpy 
 import os
 import gensim
-import transformers
-import torch
-import json
-from transformers import pipeline, AutoModelForQuestionAnswering, AutoTokenizer
+from transformers import (
+    pipeline, 
+    AutoModelForQuestionAnswering, 
+    AutoTokenizer
+)
 from fuzzywuzzy import fuzz
-from db import connectMongoEmbedded
 import openai
 
 def readMongoEmbeddedDatabase(DB_model):
@@ -45,7 +41,7 @@ class Conver():
         self.tokenizer = AutoTokenizer.from_pretrained("ancs21/xlm-roberta-large-vi-qa", use_fast=False)
         self.pipeline = pipeline("question-answering", model=self.llm_model, tokenizer=self.tokenizer)
     
-    ## fuzzy matching 
+    ## fuzzy matching 2 text
     def processingUserText(self, index):
         self.bot_.append(None)
         self.score.append(None)
@@ -74,9 +70,10 @@ class Conver():
                     self.output[index].append(item)  
                     max_score = score_fuzz
             elif score_fuzz >= 0.3:
-                string1_embedding = self.user_[index].lower().split()
-                string2_embedding = item.instruction.lower().split()
-                similar =  self.model.wmdistance(string1_embedding, string2_embedding)/max(len(self.user_[index]), len(item.instruction))
+                text_message_from_user = self.user_[index].lower().split()
+                text_embedded_from_system = item.instruction.lower().split()
+                similar =  self.model.wmdistance(text_message_from_user, text_embedded_from_system)\
+                    /max(len(self.user_[index]), len(item.instruction))
                 if similar >= 0.3:
                     self.output[index].append(item)  
         self.score[index] = max_score  
