@@ -36,6 +36,7 @@ class Dataset():
         
 class Conver():
     def __init__(self):
+        # list bot message, user message and score of embedded traning output
         self.bot_, self.user_, self.score = [], [], []
         self.length = 0
         self.output = [] # topscore list 
@@ -57,6 +58,7 @@ class Conver():
                 Max_score = fuzz.ratio(self.user_[index], item.instruction)/100
         self.score[index] = Max_score
     
+    # Get the top score embedded, use to trainning fewshot
     def topScoreList(self, index):
         self.output.append([])
         self.bot_.append(None)
@@ -117,6 +119,7 @@ class Conver():
     def openAIAPIprocessing(self, index):
         messages = []
         # retrieve documentation intruction 
+        # few shot learning configuration
         for item, index_temp in zip(self.output[index], range(5)):
             messages.append({"role": "user", "content": str(item.instruction)})
             messages.append({"role": "system", "content": str(item.output)})
@@ -124,7 +127,7 @@ class Conver():
         session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
             messages = messages,\
             temperature=0.1)
-        # return
+        # return best choice in rank reward model
         self.bot_[index] = session['choices'][0]['message']['content']
 
     def addConver(self, text):
@@ -134,14 +137,15 @@ class Conver():
         
     def getConver(self):
         if self.score[self.length-1] >= 0.9:
-            return self.answerGenerate(self.length - 1)  
-        else:
-            self.openAIAPIprocessing(self.length -1)
+            # one-shot learning 
+            messages = []
+            messages.append({"role": "user", "content": str(self.answerGenerate(self.length - 1))})
+            messages.append({"role": "user", "content": self.user_[self.length-1]})
+            session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
+                messages = messages)
+            self.bot_[self.length - 1] = session['choices'][0]['message']['content']
             return self.bot_[self.length - 1]
-    
-    def getConverRule(self):
-        if self.score[self.length-1] >= 0.9:
-            return self.bot_[self.length - 1]
         else:
+            # few-shot learning
             self.openAIAPIprocessing(self.length -1)
             return self.bot_[self.length - 1]
