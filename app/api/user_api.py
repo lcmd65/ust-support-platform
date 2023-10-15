@@ -1,8 +1,8 @@
-import flask
 from flask import render_template, Blueprint, request
 from app import db
 from app.auth.models import User, dbModel
 import json
+import openai
 from flask import jsonify
 from app.blog.models import Conver
 
@@ -25,16 +25,27 @@ def user_api():
 def openai_api():
     try:
         import app.cache
+        from app.api.openai import api_getting
+        openai.api_key = api_getting()
         message = request.json.get('message')
-        if app.cache.cache.get["Conversation"] == None:
+        if app.cache.cache.get("Conversation") == None:
             conversation = Conver()
             conversation.addConver(message)
-            app.cache.cache.set["Conversation"] = conversation
-            return jsonify(conversation.getConver())
+            output_message = conversation.getConver()
+            app.cache.cache.set("Conversation",  json.dumps(conversation.__dict__()))
+            return jsonify(output_message)
         else:
-            conversation = app.cache.cache.get["Conversation"]
+            conversation_session = json.loads(app.cache.cache.get("Conversation"))
+            conversation = Conver()
+            conversation.bot_ = conversation_session["bot_"]
+            conversation.user_ = conversation_session["user_"]
+            conversation.score = conversation_session["score"]
+            conversation.length = conversation_session["length"]
+            conversation.output = conversation_session["output"]
             conversation.addConver(message)
-            return jsonify(conversation.getConver())
+            output_message = conversation.getConver()
+            app.cache.cache.set("Conversation",  json.dumps(conversation.__dict__()))
+            return jsonify(output_message)
     except Exception as e:
         # Handle the exception gracefully
         return jsonify(f"Failed to generate response: {e}")

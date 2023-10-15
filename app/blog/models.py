@@ -7,8 +7,10 @@ from transformers import (
 )
 from fuzzywuzzy import fuzz
 import openai
+from app import db
 
-def readMongoEmbeddedDatabase(DB_model):
+def readMongoEmbeddedDatabase():
+    DB_model = db.DB()
     data = DB_model.connectMongoEmbedded()
     database = []
     for item in data: 
@@ -36,10 +38,27 @@ class Conver():
         self.bot_, self.user_, self.score = [], [], []
         self.length = 0
         self.output = [] # topscore list 
+        
+    def __dict__(self):
+        return {
+            "bot_": self.username,
+            "user_": self.password,
+            "score": self.email,
+            "length": self.id,
+            "output": self.output
+        }
+        
+    def initModelBase(self):
         self.model = self.sementicWord2Vec()
         self.llm_model = AutoModelForQuestionAnswering.from_pretrained("ancs21/xlm-roberta-large-vi-qa")
         self.tokenizer = AutoTokenizer.from_pretrained("ancs21/xlm-roberta-large-vi-qa", use_fast=False)
         self.pipeline = pipeline("question-answering", model=self.llm_model, tokenizer=self.tokenizer)
+        
+    def deleteModelBase(self):
+        self.model = None
+        self.llm_model = None
+        self.tokenizer = None
+        self.pipeeline = None
     
     ## fuzzy matching 2 text
     def processingUserText(self, index):
@@ -101,7 +120,7 @@ class Conver():
             return self.bot_[index]
             
     def sementicWord2Vec(self):
-        model = 'app/data/vnex.model.bin'
+        model = 'app/data/vnex.model.bin' # vinbigdata pretraied word2vec2018 - wiki vietnamsese data- Nguyen Quoc Dat
         if os.path.isfile(model):
             from packaging import version
             if version.parse(gensim.__version__) >= version.parse("1.0.1"):
@@ -128,9 +147,13 @@ class Conver():
         self.bot_[index] = session['choices'][0]['message']['content']
 
     def addConver(self, text):
+        # init sesstion processing in generator
+        self.initModelBase()
+        # processing
         self.length +=1
         self.user_.append(text)
         self.topScoreList(self.length - 1)
+        # delete sesstion model processing generator
         
     def getConver(self):
         if self.score[self.length-1] >= 0.9:
@@ -141,8 +164,8 @@ class Conver():
             session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
                 messages = messages)
             self.bot_[self.length - 1] = session['choices'][0]['message']['content']
-            return self.bot_[self.length - 1]
         else:
             # few-shot learning
             self.openAIAPIprocessing(self.length -1)
-            return self.bot_[self.length - 1]
+        self.deleteModelBase()
+        return self.bot_[self.length - 1] 
