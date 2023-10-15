@@ -29,8 +29,10 @@ def create_app(test_config=None):
     app.config.from_pyfile("config.py")
     from .auth.routes import auth_blueprint
     from .blog.routes import home_blueprint
+    from .api.user_api import api_blueprint
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(home_blueprint)
+    app.register_blueprint(api_blueprint)
     cache.cache.init_app(app)
     if test_config is None:
         # load the instance config, if it exists, when not testing

@@ -122,7 +122,7 @@
                     addMessage(message, true);
                     // Send the message to the bot
                     try {
-                        const response = await fetch("/api", {
+                        const response = await fetch("/openai_api", {
                           method: "POST",
                           headers: {
                             "Content-Type": "application/json",
