@@ -41,10 +41,10 @@ class Conver():
         
     def __dict__(self):
         return {
-            "bot_": self.username,
-            "user_": self.password,
-            "score": self.email,
-            "length": self.id,
+            "bot_": self.bot_,
+            "user_": self.user_,
+            "score": self.score,
+            "length": self.length,
             "output": self.output
         }
         
