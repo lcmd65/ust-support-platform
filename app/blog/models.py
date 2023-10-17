@@ -38,6 +38,7 @@ class Conver():
         self.bot_, self.user_, self.score = [], [], []
         self.length = 0
         self.output = [] # topscore list 
+        self.output_length = [] # topscrore list volume, each index is define <=5
         
     def __dict__(self):
         return {
@@ -62,7 +63,6 @@ class Conver():
     
     ## fuzzy matching 2 text
     def processingUserText(self, index):
-        self.bot_.append(None)
         self.score.append(None)
         database_embedded = readMongoEmbeddedDatabase()
         Max_score = 0
@@ -76,51 +76,49 @@ class Conver():
     # Get the top score embedded, use to trainning fewshot
     def topScoreList(self, index):
         self.output.append([])
-        self.bot_.append(None)
-        self.score.append(None)
+        self.output_length.append(int(0))
+        self.score.append([])
         database_embedded = readMongoEmbeddedDatabase()
-        max_score = 0.8
         # fuzzy top score phrase
         for item in database_embedded:
             score_fuzz = fuzz.ratio(self.user_[index], item.instruction)/100
             if  score_fuzz >= 0.8:
-                if score_fuzz > max_score:
-                    self.bot_[index] = item.output
-                    self.output[index].append(item)  
-                    max_score = score_fuzz
-            elif score_fuzz >= 0.3:
+                self.bot_[index] = item.output
+                self.output[index].append(item)
+                self.score[index].append(score_fuzz)
+                self.output_length[index] +=1
+            elif score_fuzz >= 0.5:
                 text_message_from_user = self.user_[index].lower().split()
                 text_embedded_from_system = item.instruction.lower().split()
                 similar =  self.model.wmdistance(text_message_from_user, text_embedded_from_system)\
                     /max(len(self.user_[index]), len(item.instruction))
-                if similar >= 0.3:
+                if similar >= 0.5:
                     self.output[index].append(item)  
-        self.score[index] = max_score  
-                        
+                    self.score[index].append(score_fuzz*similar)
+                    self.output_length[index] += 1
+                                            
     def questionAnswering(self, question_, context_):
-        answer = self.pipeline(question=question_, context=context_)
+        answer = self.pipeline(question = question_, context = context_)
         return answer
         
     def processingTopScoreList(self, index):
-        # processing Word2vec phrase
-        max_score = self.score[index]
-        for item in self.output[index]:
-            answer_ = self.questionAnswering(self.user_[index], item.output)
-            combine_score = answer_['score']*0.75 + fuzz.ratio(self.user_[index], item.output)*0.25/100
-            if  combine_score >= max_score:
-                self.bot_[index] = answer_['answer']
-                max_score = combine_score
-        self.score[index] = max_score
-    
-    def answerGenerate(self, index):
-        if self.bot_[index] != None:
-            return self.bot_[index]
-        else:
-            self.processingTopScoreList(index)
-            return self.bot_[index]
+        # processing fewhot collect phrase
+        output_new, output_length_new = [], int(0)
+        while self.output_length[index] > 0 and output_length_new < 5:
+                for index2 in range(self.output_length[index]-1):
+                    if self.score[index][index2] == max(self.score[index]):
+                        output_new.append(self.output[index][index2])
+                        self.score[index].pop(index2)
+                        self.output[index].pop(index2)
+                        self.output_length[index] -= 1
+                        output_length_new += 1
+                        break
+        self.output[index] = output_new
+        self.output_length[index] = output_length_new
             
     def sementicWord2Vec(self):
-        model = 'app/data/vnex.model.bin' # vinbigdata pretraied word2vec2018 - wiki vietnamsese data- Nguyen Quoc Dat
+        # vinbigdata pretraied word2vec2018 - wiki vietnamsese data- Nguyen Quoc Dat
+        model = 'app/api/vnex.model.bin' 
         if os.path.isfile(model):
             from packaging import version
             if version.parse(gensim.__version__) >= version.parse("1.0.1"):
@@ -136,36 +134,27 @@ class Conver():
         messages = []
         # retrieve documentation intruction 
         # few shot learning configuration
-        for item, index_temp in zip(self.output[index], range(5)):
+        for item in (self.output[index]):
             messages.append({"role": "user", "content": str(item.instruction)})
             messages.append({"role": "system", "content": str(item.output)})
         messages.append({"role": "user", "content": self.user_[index]})
         session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
-            messages = messages,\
-            temperature=0.1)
+            messages = messages)
         # return best choice in rank reward model
-        self.bot_[index] = session['choices'][0]['message']['content']
+        self.bot_.append(session['choices'][0]['message']['content'])
 
     def addConver(self, text):
         # init sesstion processing in generator
         self.initModelBase()
         # processing
-        self.length +=1
+        self.length += 1
         self.user_.append(text)
         self.topScoreList(self.length - 1)
+        self.processingTopScoreList(self.length - 1)
         # delete sesstion model processing generator
         
     def getConver(self):
-        if self.score[self.length-1] >= 0.9:
-            # one-shot learning 
-            messages = []
-            messages.append({"role": "user", "content": str(self.answerGenerate(self.length - 1))})
-            messages.append({"role": "user", "content": self.user_[self.length-1]})
-            session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
-                messages = messages)
-            self.bot_[self.length - 1] = session['choices'][0]['message']['content']
-        else:
-            # few-shot learning
-            self.openAIAPIprocessing(self.length -1)
+        self.openAIAPIprocessing(self.length -1)
+        # delete the model base after processing
         self.deleteModelBase()
-        return self.bot_[self.length - 1] 
+        return self.bot_[self.length - 1]
