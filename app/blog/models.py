@@ -60,19 +60,7 @@ class Conver():
         self.llm_model = None
         self.tokenizer = None
         self.pipeeline = None
-    
-    ## fuzzy matching 2 text
-    def processingUserText(self, index):
-        self.score.append(None)
-        database_embedded = readMongoEmbeddedDatabase()
-        Max_score = 0
-        Max_score = fuzz.ratio(self.user_[index], database_embedded[0].instruction)/100
-        for item in database_embedded:
-            if fuzz.ratio(self.user_[index], item.instruction)/100 >= Max_score:
-                self.bot_[index] = item.output
-                Max_score = fuzz.ratio(self.user_[index], item.instruction)/100
-        self.score[index] = Max_score
-    
+        
     # Get the top score embedded, use to trainning fewshot
     def topScoreList(self, index):
         self.output.append([])
@@ -83,7 +71,6 @@ class Conver():
         for item in database_embedded:
             score_fuzz = fuzz.ratio(self.user_[index], item.instruction)/100
             if  score_fuzz >= 0.8:
-                self.bot_[index] = item.output
                 self.output[index].append(item)
                 self.score[index].append(score_fuzz)
                 self.output_length[index] +=1
