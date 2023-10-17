@@ -81,7 +81,7 @@ class Conver():
                     /max(len(self.user_[index]), len(item.instruction))
                 if similar >= 0.5:
                     self.output[index].append(item)  
-                    self.score[index].append(score_fuzz*similar)
+                    self.score[index].append(score_fuzz * similar)
                     self.output_length[index] += 1
                                             
     def questionAnswering(self, question_, context_):

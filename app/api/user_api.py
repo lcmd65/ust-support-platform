@@ -29,12 +29,14 @@ def openai_api():
         openai.api_key = api_getting()
         message = request.json.get('message')
         if app.cache.cache.get("Conversation") == None:
+            # create conversation cache
             conversation = Conver()
             conversation.addConver(message)
             output_message = conversation.getConver()
             app.cache.cache.set("Conversation",  json.dumps(conversation.__dict__()))
             return jsonify(output_message)
         else:
+            # get conversation cache
             conversation_session = json.loads(app.cache.cache.get("Conversation"))
             conversation = Conver()
             conversation.bot_ = conversation_session["bot_"]
