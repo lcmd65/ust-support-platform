@@ -77,7 +77,8 @@
             const treeview = document.querySelector(".tree-view")
             const chatBox = document.querySelector(".chat-box");
             const messageInput = document.querySelector("#message-input");
-            const sendBtn = document.querySelector("#send-btn");
+            const sendBtn = document.querySelector("#send-btn")
+            const chatContainer = document.querySelector(".chatbot-workspace-container")
             
             function addMessage(message, isUserMessage) {
                 const messageDiv = document.createElement("div");
@@ -116,8 +117,8 @@
                 if (message !== "") {
                     // Add a loading indicator
                     const loadingIndicator = document.createElement("div");
-                    loadingIndicator.classList.add("loading");
-                    chatBox.appendChild(loadingIndicator);
+                    loadingIndicator.classList.add("loader");
+                    chatContainer.appendChild(loadingIndicator);
                     // Add the user's message to the chat box
                     addMessage(message, true);
                     // Send the message to the bot
@@ -142,7 +143,7 @@
                         }
                       
                         // Remove the loading indicator
-                        const loadingIndicator = document.querySelector(".loading");
+                        const loadingIndicator = document.querySelector(".loader");
                         loadingIndicator.remove();
                       
                         // Add the bot's response to the chat box
@@ -166,7 +167,7 @@
                         chatBox.appendChild(errorMessageDiv);
                       
                         // Remove the loading indicator even if there is an error
-                        const loadingIndicator = document.querySelector(".loading");
+                        const loadingIndicator = document.querySelector(".loader");
                         loadingIndicator.remove();
                     }
                     // Clear the message input
