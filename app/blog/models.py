@@ -94,7 +94,7 @@ class Conver():
     def processingTopScoreList(self, index):
         # processing fewhot collect phrase
         output_new, output_length_new = [], int(0)
-        while self.output_length[index] > 0 and output_length_new < 5:
+        while self.output_length[index] > 0 and output_length_new < 3:
                 for index2 in range(self.output_length[index]-1):
                     if self.score[index][index2] == max(self.score[index]):
                         output_new.append(self.output[index][index2])
@@ -124,7 +124,7 @@ class Conver():
         messages = []
         # retrieve documentation intruction 
         # few shot learning configuration
-        for item in (self.output[index]):
+        for item in self.output[index]:
             messages.append({"role": "user", "content": str(item.instruction)})
             messages.append({"role": "system", "content": str(item.output)})
         messages.append({"role": "user", "content": self.user_[index]})
