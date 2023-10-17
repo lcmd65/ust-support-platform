@@ -23,7 +23,6 @@ def user_api():
 # get cache request api
 @api_blueprint.route("/openai_api", methods = ['POST'])
 def openai_api():
-    try:
         import app.cache
         from app.api.openai import api_getting
         openai.api_key = api_getting()
@@ -41,14 +40,10 @@ def openai_api():
             conversation = Conver()
             conversation.bot_ = conversation_session["bot_"]
             conversation.user_ = conversation_session["user_"]
-            conversation.score = conversation_session["score"]
             conversation.length = conversation_session["length"]
-            conversation.output = conversation_session["output"]
+            conversation.re_init()
             conversation.addConver(message)
             output_message = conversation.getConver()
             app.cache.cache.set("Conversation",  json.dumps(conversation.__dict__()))
             return jsonify(output_message)
-    except Exception as e:
-        # Handle the exception gracefully
-        return jsonify(f"Failed to generate response: {e}")
     

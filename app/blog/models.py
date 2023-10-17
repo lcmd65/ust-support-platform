@@ -44,10 +44,13 @@ class Conver():
         return {
             "bot_": self.bot_,
             "user_": self.user_,
-            "score": self.score,
             "length": self.length,
-            "output": self.output
         }
+    def re_init(self):
+        for index in range (self.length):
+            self.output.append(None)
+            self.output_length.append(None)
+            self.score.append(None)
         
     def initModelBase(self):
         self.model = self.sementicWord2Vec()

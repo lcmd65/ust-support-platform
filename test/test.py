@@ -145,3 +145,7 @@ class Conver():
         # delete the model base after processing
         self.deleteModelBase()
         return self.bot_[self.length - 1]
+    
+if __name__ == "__main__":
+    from app.api.openai import api_getting
+    openai.api_key = api_getting()
