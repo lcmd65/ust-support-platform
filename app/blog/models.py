@@ -47,7 +47,7 @@ class Conver():
             "length": self.length,
         }
     def re_init(self):
-        for index in range (self.length):
+        for item in self.user_:
             self.output.append(None)
             self.output_length.append(None)
             self.score.append(None)
@@ -95,8 +95,8 @@ class Conver():
         # processing fewhot collect phrase
         output_new, output_length_new = [], int(0)
         while self.output_length[index] > 0 and output_length_new < 3:
-                for index2 in range(self.output_length[index]-1):
-                    if self.score[index][index2] == max(self.score[index]):
+            for index2 in range(self.output_length[index]-1):
+                if self.score[index][index2] == max(self.score[index]):
                         output_new.append(self.output[index][index2])
                         self.score[index].pop(index2)
                         self.output[index].pop(index2)
@@ -127,7 +127,9 @@ class Conver():
         for item in self.output[index]:
             messages.append({"role": "user", "content": str(item.instruction)})
             messages.append({"role": "system", "content": str(item.output)})
+            print(item.instruction, item.output)
         messages.append({"role": "user", "content": self.user_[index]})
+        print(self.user_[index])
         session = openai.ChatCompletion.create(model="gpt-3.5-turbo",\
             messages = messages)
         # return best choice in rank reward model
