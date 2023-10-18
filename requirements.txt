@@ -33,3 +33,4 @@ pandas
 flask-sqlalchemy
 flask-caching
 openai
+fuzzywuzzy
