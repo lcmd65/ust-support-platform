@@ -1,9 +1,13 @@
-from flask import render_template, Blueprint, request
+from flask import (
+    render_template,
+    Blueprint,
+    request,
+    jsonify
+)
 from app import db
 from app.auth.models import User, dbModel
 import json
 import openai
-from flask import jsonify
 from app.blog.models import Conver
 
 

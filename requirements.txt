@@ -34,3 +34,4 @@ flask-sqlalchemy
 flask-caching
 openai
 fuzzywuzzy
+torch
