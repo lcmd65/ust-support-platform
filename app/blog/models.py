@@ -10,6 +10,7 @@ import openai
 from app import db
 
 def readMongoEmbeddedDatabase():
+    # read database embededed document
     DB_model = db.DB()
     data = DB_model.connectMongoEmbedded()
     database = []
