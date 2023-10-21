@@ -9,6 +9,9 @@ from fuzzywuzzy import fuzz
 import openai
 from app import db
 
+
+MAX_TOKEN = 100
+
 def readMongoEmbeddedDatabase():
     # read database embededed document
     DB_model = db.DB()
@@ -65,13 +68,13 @@ class Conver():
         self.tokenizer = None
         self.pipeeline = None
         
-    # Get the top score embedded, use to trainning fewshot
+    # Get the top score embedded, use to trainning few-shot learning
     def topScoreList(self, index):
         self.output.append([])
         self.output_length.append(int(0))
         self.score.append([])
         database_embedded = readMongoEmbeddedDatabase()
-        # fuzzy top score phrase
+        # fuzzy top score phrase by levhenstein - distaince 
         for item in database_embedded:
             score_fuzz = fuzz.ratio(self.user_[index], item.instruction)/100
             if  score_fuzz >= 0.8:
@@ -93,17 +96,17 @@ class Conver():
         return answer
         
     def processingTopScoreList(self, index):
-        # processing fewhot collect phrase
+        # processing few-shot learning collect phrase 
         output_new, output_length_new = [], int(0)
         while self.output_length[index] > 0 and output_length_new < 3:
             for index2 in range(self.output_length[index]-1):
                 if self.score[index][index2] == max(self.score[index]):
-                        output_new.append(self.output[index][index2])
-                        self.score[index].pop(index2)
-                        self.output[index].pop(index2)
-                        self.output_length[index] -= 1
-                        output_length_new += 1
-                        break
+                    output_new.append(self.output[index][index2])
+                    self.score[index].pop(index2)
+                    self.output[index].pop(index2)
+                    self.output_length[index] -= 1
+                    output_length_new += 1
+                    break
         self.output[index] = output_new
         self.output_length[index] = output_length_new
             
@@ -121,7 +124,26 @@ class Conver():
                 word2vec_model = Word2Vec.load_word2vec_format(model, binary=True)
                 return word2vec_model
             
+    # processing instruction text:
+    def processingIntructionText(self, text):
+        import nltk
+        messages, token_messages, number_token = [],  None, 0 
+        list_token = nltk.tokenize(text)
+        for token in list_token:
+            if token  == ".":
+                messages.append(token_messages)
+                token_messages = None # re processing a new messsage 
+                number_token +=1
+            else:
+                token_messages = " ".join([token_messages, token])
+                number_token += 1
+                if number_token >= MAX_TOKEN:
+                    break
+        return messages
+    
+            
     def openAIAPIprocessing(self, index):
+        import nltk
         messages = []
         # retrieve documentation intruction 
         # few shot learning configuration
