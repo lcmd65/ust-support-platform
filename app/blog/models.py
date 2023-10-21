@@ -127,7 +127,7 @@ class Conver():
     # processing instruction text:
     def processingIntructionText(self, text):
         import nltk
-        messages, token_messages, number_token = [],  None, 0 
+        messages, token_messages, number_token = [],  None, 0 # message, message container and limit token top range
         list_token = nltk.tokenize(text)
         for token in list_token:
             if token  == ".":
@@ -140,7 +140,6 @@ class Conver():
                 if number_token >= MAX_TOKEN:
                     break
         return messages
-    
             
     def openAIAPIprocessing(self, index):
         import nltk
