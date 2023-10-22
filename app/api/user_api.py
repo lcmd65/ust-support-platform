@@ -50,6 +50,18 @@ def openai_api():
         output_message = conversation.getConver()
         app.cache.cache.set("Conversation",  json.dumps(conversation.__dict__()))
         return jsonify(output_message)
+    
+    
+# get electronic authentication
+@api_blueprint.route("/authentication_api", methods = ['POST'])
+def authentication_api():
+    import app.cache
+    import cv2
+    
+    pass
+    
+    
+
 
     
     
