@@ -37,3 +37,4 @@ fuzzywuzzy
 torch
 fastapi
 levenshtein
+cv2

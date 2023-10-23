@@ -57,9 +57,17 @@ def openai_api():
 def authentication_api():
     import app.cache
     import cv2
+    # image getting
     
+    
+    # image processing fewshot learning
+    
+     
     pass
     
+@api_blueprint.route("/init_image", method = ['POST'])
+def init_authentication():
+    pass
     
 
 
