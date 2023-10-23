@@ -67,9 +67,12 @@ def authentication_api():
     
 @api_blueprint.route("/init_image", method = ['POST'])
 def init_authentication():
+    
+    
     pass
     
 
-
+def model_authentication():
+    pass
     
     
