@@ -5,7 +5,6 @@ from flask import (
     render_template,
     redirect,
     jsonify,
-    url_for,
     g)
 import app.cache
 import json
@@ -15,12 +14,12 @@ from app.auth.models import User, dbModel
 
 home_blueprint = Blueprint('home_blueprint', __name__)
             
-
+# home page
 @home_blueprint.route("/home",methods = ['GET', 'POST'])
 def home():
-    model = json.loads(app.cache.cache.get('database'))
-    user = User(None, None, None, None, None)
-    user.initFromUser(model)
+    model = json.loads(app.cache.cache.get('database')) # cache get
+    user = User(None, None, None, None, None) # NULL data user
+    user.initFromUser(model) # init User data from cache
     if request.method == "POST":
         button_value = request.form.get("button")
         if button_value == "chatbox":

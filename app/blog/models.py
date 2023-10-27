@@ -63,7 +63,8 @@ class Conver():
         self.pipeline = pipeline("question-answering", model=self.llm_model, tokenizer=self.tokenizer)
         
     def deleteModelBase(self):
-        self.model = None
+        # delete linked and prototype/ authentication
+        self.model = None 
         self.llm_model = None
         self.tokenizer = None
         self.pipeeline = None
