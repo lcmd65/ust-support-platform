@@ -10,7 +10,7 @@ import openai
 from app import db
 
 
-MAX_TOKEN = 100
+MAX_TOKEN = 100 # Max token per instruction
 
 def readMongoEmbeddedDatabase():
     # read database embededed document
