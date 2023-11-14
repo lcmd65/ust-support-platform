@@ -52,7 +52,7 @@ def create_app(test_config=None):
     def main():
         return render_template("base.html")
     @app.route('/nohcel')
-    def susbot():
+    def nohcel():
         return render_template("base.html")
     return app
 
